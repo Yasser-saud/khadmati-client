@@ -1,39 +1,38 @@
-import React from "react";
-import styled from "styled-components";
-
-const PersonalInfo = ({ register }) => {
+import React from "react"
+import styled from "styled-components"
+import ErrorStyle from "./ErrorStyle"
+const PersonalInfo = ({register, errors}) => {
 	return (
 		<Container>
-			<p>البيانات الشخصية</p>
+			<Tag>البيانات الشخصية</Tag>
+
 			<label>الاسم الشخصي</label>
 			<input type="name" name="fullName" ref={register} placeholder="مثال: محمد خالد بدر" />
+			<ErrorStyle msg={errors.fullName?.message} />
 
 			<label>المنطقة</label>
-			<input type="name" name="fullName" ref={register} placeholder="مثال: المنطقة الغربية" />
+			<input type="name" name="district" ref={register} placeholder="مثال: المنطقة الغربية" />
+			<ErrorStyle msg={errors.district?.message} />
 
 			<label>المدينة</label>
-			<input type="name" name="fullName" ref={register} placeholder="مثال: مكة المكرمة" />
+			<input type="name" name="city" ref={register} placeholder="مثال: مكة المكرمة" />
+			<ErrorStyle msg={errors.city?.message} />
 		</Container>
-	);
-};
+	)
+}
 
 const Container = styled.div`
+	flex: 35%;
 	order: 1;
 	width: 374px;
-	height: 357px;
+	max-height: 387px;
 	border: 0.5px solid #afafaf;
 	box-sizing: border-box;
 	border-radius: 14px;
 	display: flex;
 	flex-direction: column;
 	padding: 10px 20px;
-	margin-left: 30px;
-
-	p {
-		text-align: center;
-		font-size: 24px;
-		margin-bottom: 10px;
-	}
+	margin: 20px;
 	label {
 		margin-bottom: 10px;
 		text-align: right;
@@ -50,6 +49,10 @@ const Container = styled.div`
 		border-radius: 4px;
 		padding: 0 10px;
 	}
-`;
-
-export default PersonalInfo;
+`
+const Tag = styled.p`
+	text-align: center;
+	font-size: 24px;
+	margin-bottom: 10px;
+`
+export default PersonalInfo

@@ -1,32 +1,54 @@
-import React, { useRef } from "react";
-import styled from "styled-components";
-import UserPic from "../../svg/user-solid.svg";
+import React, {useEffect, useState} from "react"
+import styled from "styled-components"
+import UserPic from "../../svg/user-solid.svg"
 
-const Picture = ({ register }) => {
-	const InputRef = useRef([]);
+const Picture = ({register}) => {
+	const [preview, setPreview] = useState()
+	const [selectedFile, setSelecetedFile] = useState()
+
+	useEffect(() => {
+		if (!selectedFile) {
+			setPreview(undefined)
+			return
+		}
+		const objectUrl = URL.createObjectURL(selectedFile)
+		setPreview(objectUrl)
+		return () => {
+			URL.revokeObjectURL(objectUrl)
+		}
+	}, [selectedFile])
+
+	const onSelectFile = (e) => {
+		if (!e.target.files || e.target.files.length === 0) {
+			setSelecetedFile(undefined)
+			return
+		}
+		setSelecetedFile(e.target.files[0])
+	}
 
 	return (
 		<Container>
+			<PicContainer>
+				{selectedFile ? <img src={preview} width="185px" height="auto" /> : <UserPic />}
+			</PicContainer>
 			<input
 				type="file"
-				name="pic"
-				onChange={(e) => console.log(e.target.value)}
-				ref={(register, InputRef)}
+				name="picture"
+				// onChange={onSelectFile}
+				onChange={(e) => console.log(e.target.files)}
+				ref={register}
 				placeholder="الصوره"
+				accept="image/*"
 			/>
-
-			<PicContainer>
-				<UserPic />
-			</PicContainer>
-			<p onClick={() => InputRef.current.click()}>اضغط هنا لرفع صورة</p>
 		</Container>
-	);
-};
+	)
+}
 
 const Container = styled.div`
-	order: 3;
+	flex: 35%;
+	order: 4;
 	width: 255px;
-	height: 296px;
+	height: 357px;
 	background: #eceef2;
 	border: 1px dotted #afafaf;
 	border-radius: 14px;
@@ -34,18 +56,21 @@ const Container = styled.div`
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	margin: 20px;
 	p {
 		margin-top: 30px;
 		font-size: 17px;
 	}
 	input {
-		/* display: none; */
+		text-align: center;
+		margin-top: 30px;
+		width: 220px;
 	}
-`;
+`
 const PicContainer = styled.div`
 	width: 181px;
 	height: 181px;
-	border-radius: 50%;
+	border-radius: 70%;
 	background: #d4d4d4;
 	display: flex;
 	justify-content: center;
@@ -56,5 +81,5 @@ const PicContainer = styled.div`
 		width: 100px;
 		color: gray;
 	}
-`;
-export default Picture;
+`
+export default Picture

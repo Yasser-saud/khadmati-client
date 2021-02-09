@@ -1,51 +1,48 @@
-import React, { useState } from "react";
-import styled from "styled-components";
+import React, {useState} from "react"
+import styled from "styled-components"
+import ErrorStyle from "./ErrorStyle"
 
-const ServicesInfo = ({ register }) => {
-	const [isChecked, setIsChecked] = useState();
+const ServicesInfo = ({register, errors}) => {
+	const [isChecked, setIsChecked] = useState()
 
 	return (
 		<Container>
-			<p>الخدمات التوفرة لديك</p>
-			<Wrapper checked={isChecked}>
+			<Tag>الخدمات التوفرة لديك</Tag>
+			<Wrapper>
 				<label>توصيل طلاب</label>
-				<input
-					checked={isChecked}
-					onChange={() => setIsChecked(!isChecked)}
-					type="checkbox"
-					name="whatsapp"
-					ref={register}
-				/>
+				<input type="checkbox" name="services" value="توصيل طلاب" ref={register} />
 			</Wrapper>
 
 			<Wrapper>
 				<label>توصيل معلمات</label>
-				<input type="checkbox" name="whatsapp" ref={register} />
+				<input type="checkbox" name="services" value="توصيل معلمات" ref={register} />
 			</Wrapper>
 
 			<Wrapper>
 				<label>مندوب توصيل</label>
-				<input type="checkbox" name="whatsapp" ref={register} />
+				<input type="checkbox" name="services" value="مندوب توصيل" ref={register} />
 			</Wrapper>
 
 			<Wrapper>
 				<label>مدرس خاص</label>
-				<input type="checkbox" name="whatsapp" ref={register} />
+				<input type="checkbox" name="services" value="مدرس خاص" ref={register} />
 			</Wrapper>
 
 			<Wrapper>
 				<label>مدرس خاص</label>
-				<input type="checkbox" name="whatsapp" ref={register} />
+				<input type="checkbox" name="services" value="مدرس خاص" ref={register} />
 			</Wrapper>
 
 			<Wrapper>
 				<label>مدرس خاص</label>
-				<input type="checkbox" name="whatsapp" ref={register} />
+				<input type="checkbox" name="services" value="مدرس خاص" ref={register} />
 			</Wrapper>
+			<ErrorStyle msg={errors.services?.message} />
 		</Container>
-	);
-};
+	)
+}
 const Container = styled.div`
+	flex: 35%;
 	order: 2;
 	padding: 10px 20px;
 	width: 374px;
@@ -55,29 +52,25 @@ const Container = styled.div`
 	border-radius: 14px;
 	display: flex;
 	flex-direction: column;
-	margin-left: 30px;
-	p {
-		text-align: center;
-		font-size: 24px;
-		margin-bottom: 10px;
-	}
-`;
-
+	margin: 20px;
+`
+const Tag = styled.div`
+	text-align: center;
+	font-size: 24px;
+	margin-bottom: 10px;
+`
 const Wrapper = styled.div`
 	display: flex;
 	flex-direction: row-reverse;
 	justify-content: space-between;
 	align-items: center;
-	height: 40px;
+	height: 45px;
 	padding: 0 10px;
 	background: #dbdbdb;
 	border-radius: 4px;
 	margin-bottom: 20px;
 	position: relative;
 	overflow: hidden;
-	&input:checked {
-		background: blue;
-	}
-`;
+`
 
-export default ServicesInfo;
+export default ServicesInfo

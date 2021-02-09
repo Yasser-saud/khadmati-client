@@ -1,25 +1,30 @@
-import React from "react";
-import styled from "styled-components";
+import React from "react"
+import styled from "styled-components"
+import ErrorStyle from "./ErrorStyle"
 
-const ContactInfo = ({ register }) => {
+const ContactInfo = ({register, errors}) => {
 	return (
 		<Container>
-			<p>بيانات التواصل</p>
+			<Tag>بيانات التواصل</Tag>
+
 			<label>Twitter / حساب التويتر</label>
-			<input type="name" name="twitter" ref={register} placeholder="@user123" />
+			<input type="name" name="twitterAcc" ref={register} placeholder="@user123" />
+			<ErrorStyle msg={errors.twitterAcc?.message} />
 
 			<label>Instagram / حساب الانستقرام</label>
-			<input type="name" name="twitter" ref={register} placeholder="@user123" />
+			<input type="name" name="instagramAcc" ref={register} placeholder="@user123" />
+			<ErrorStyle msg={errors.instagramAcc?.message} />
 
 			<label>WhatsApp / رقم الواتس اب</label>
-			<input type="name" name="twitter" ref={register} placeholder="0512345678" />
+			<input type="name" name="whatsappAcc" ref={register} placeholder="0512345678" />
+			<ErrorStyle msg={errors.whatsappAcc?.message} />
 		</Container>
-	);
-};
+	)
+}
 
 const Container = styled.div`
-	/* margin: 10px 0; */
-	order: 4;
+	flex: 35%;
+	order: 3;
 	width: 374px;
 	height: 357px;
 	border: 0.5px solid #afafaf;
@@ -28,12 +33,8 @@ const Container = styled.div`
 	display: flex;
 	flex-direction: column;
 	padding: 10px 20px;
+	margin: 20px;
 
-	p {
-		text-align: center;
-		font-size: 24px;
-		margin-bottom: 10px;
-	}
 	label {
 		margin-bottom: 10px;
 		text-align: right;
@@ -53,5 +54,10 @@ const Container = styled.div`
 			border: 0.5px blue;
 		}
 	}
-`;
-export default ContactInfo;
+`
+const Tag = styled.p`
+	text-align: center;
+	font-size: 24px;
+	margin-bottom: 10px;
+`
+export default ContactInfo
