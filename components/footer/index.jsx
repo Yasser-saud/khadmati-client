@@ -1,8 +1,8 @@
-import styled from "styled-components";
-import TwitterIcon from "../svg/twitter-brands.svg";
-import GithubIcon from "../svg/github-brands.svg";
-import Link from "next/link";
-
+import styled from "styled-components"
+import TwitterIcon from "../svg/twitter-brands.svg"
+import GithubIcon from "../svg/github-brands.svg"
+import Link from "next/link"
+import React from "react"
 const index = () => {
 	return (
 		<FooterContainer>
@@ -25,8 +25,8 @@ const index = () => {
 				</IconsBox>
 			</ContentWrapper>
 		</FooterContainer>
-	);
-};
+	)
+}
 
 const FooterContainer = styled.footer`
 	height: 80px;
@@ -34,14 +34,14 @@ const FooterContainer = styled.footer`
 	background: #262626;
 	position: absolute;
 	bottom: 0;
-`;
+`
 const ContentWrapper = styled.div`
 	height: 100%;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	color: white;
-`;
+`
 const NameBox = styled.div`
 	font-size: 13px;
 	height: 100%;
@@ -53,7 +53,7 @@ const NameBox = styled.div`
 	@media screen and (max-width: 700px) {
 		font-size: 10px;
 	}
-`;
+`
 
 const IconsBox = styled.div`
 	height: 100%;
@@ -73,7 +73,7 @@ const IconsBox = styled.div`
 			filter: brightness(0.8);
 		}
 	}
-`;
+`
 
 const PolicyBox = styled.div`
 	height: 100%;
@@ -92,6 +92,6 @@ const PolicyBox = styled.div`
 			font-size: 10px;
 		}
 	}
-`;
+`
 
-export default index;
+export default index

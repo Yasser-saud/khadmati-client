@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useState} from "react"
 import styled from "styled-components"
 import {useForm} from "react-hook-form"
 import {yupResolver} from "@hookform/resolvers/yup"
@@ -7,47 +7,31 @@ import ContactInfo from "./ContactInfo"
 import ServicesInfo from "./ServicesInfo"
 import Picture from "./Picture"
 import {schema} from "./validation"
-import {useDispatch, useSelector} from "react-redux"
-import {editProfileSelector, submitProfile} from "../../../store/editProfile"
 import axios from "axios"
+import {pickBy} from "lodash"
 
 const index = () => {
-	const dispatch = useDispatch()
-	const {loading, hasErrors, errMessage} = useSelector(editProfileSelector)
+	const [loading, setLoading] = useState(false)
+	const [error, setError] = useState(null)
+
 	const {register, handleSubmit, errors} = useForm({
 		resolver: yupResolver(schema),
 	})
 
 	const onSubmit = async (data) => {
-		const {
-			fullName,
-			district,
-			city,
-			services,
-			twitterAcc,
-			instagramAcc,
-			whatsappAcc,
-			Picture,
-		} = data
-		console.log(data)
-		await dispatch(submitProfile({fullName, district, city, services, twitterAcc}))
+		const finalValues = pickBy(data, (value) => value.length > 0)
+		console.log(finalValues)
+		setLoading(true)
 
-		if (!hasErrors) {
-			console.log("pass")
+		try {
+			const res = await axios.patch("/api/profile/update-profile", finalValues)
+			setLoading(false)
+			console.log(res.data.message)
+		} catch (error) {
+			setLoading(false)
+			setError(error.response.data.errors)
+			console.log(error.response.data.errors)
 		}
-		console.log(errMessage)
-		// try {
-		// 	const res = await axios.post("/api/profile/new-profile", {
-		// 		fullName,
-		// 		district,
-		// 		city,
-		// 		services,
-		// 		twitterAcc,
-		// 	})
-		// 	console.log(res)
-		// } catch (error) {
-		// 	console.log(error.response)
-		// }
 	}
 
 	return (
@@ -59,7 +43,7 @@ const index = () => {
 				<Picture register={register} errors={errors} />
 			</Form>
 
-			<Button disabled={loading ? "true" : ""} form="form" type="submit">
+			<Button disabled={loading ? true : ""} form="form" type="submit">
 				{loading ? "دقيقه...." : "حفظ البيانات"}
 			</Button>
 		</Container>

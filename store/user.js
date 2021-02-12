@@ -4,8 +4,6 @@ import axios from "axios"
 const initialState = {
 	loading: false,
 	userInfo: null,
-	hasErrors: false,
-	errMessage: null,
 	isAuthenticated: false,
 }
 
@@ -17,39 +15,38 @@ const userSlice = createSlice({
 			state.loading = true
 		},
 		getUserSuccess: (state, {payload}) => {
-			;(state.loading = false),
-				(state.userInfo = payload),
-				(state.isAuthenticated = true),
-				(state.hasErrors = false)
-		},
-		getUserFailuer: (state, {payload}) => {
-			;(state.loading = false), (state.hasErrors = true), (state.errMessage = payload)
+			state.loading = false
+			state.userInfo = payload
+			state.isAuthenticated = true
 		},
 		logoutSuccess: (state, {payload}) => {
-			;(state.isAuthenticated = false), (state.userInfo = null)
+			state.isAuthenticated = false
+			state.userInfo = null
+		},
+		CLEAR_STATE: (state, {}) => {
+			state.isAuthenticated = false
+			state.userInfo = null
 		},
 	},
 })
 
-export const {getUser, getUserSuccess, getUserFailuer, logoutSuccess} = userSlice.actions
+export const {getUser, getUserSuccess, logoutSuccess, CLEAR_STATE} = userSlice.actions
 
 export default userSlice.reducer
 
 export const userSelector = (state) => state.user
 
-export function fetchUser() {
+export function fetchUser(userInfo) {
 	return async (dispatch) => {
-		dispatch(getUser())
-
-		try {
-			const res = await axios.get("/api/user/get-user")
-			dispatch(getUserSuccess(res.data))
-		} catch (error) {
-			console.log(error.response)
-			dispatch(getUserFailuer())
-		}
+		dispatch(getUserSuccess(userInfo))
 	}
 }
+export function clearState() {
+	return (dispatch) => {
+		dispatch(CLEAR_STATE())
+	}
+}
+
 export function logout() {
 	return async (dispatch) => {
 		try {

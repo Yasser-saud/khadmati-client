@@ -1,49 +1,45 @@
-import {createSlice} from '@reduxjs/toolkit'
-import {fetchUser} from './user'
-import axios from 'axios';
+import {createSlice} from "@reduxjs/toolkit"
+import axios from "axios"
 
 const loginSlice = createSlice({
-    name: "login",
-    initialState:{
-        hasErrors: false,
-        errMessage: null,
-        loading: false,
-        sucess: false
-    },
-    reducers:{
-        loggingIn: (state, {payload}) =>{
-            state.loading = true
-        },
-        loginSucess: (state, {payload}) => {
-            state.sucess = true
-            state.loading = false,
-            state.hasErrors = false
-        },
-        loginFailuer: (state, {payload}) => {
-            state.loading = false,
-            state.hasErrors = true,
-            state.errMessage = payload
-        }
-    }
+	name: "login",
+	initialState: {
+		hasErrors: false,
+		errMessage: null,
+		loading: false,
+		success: false,
+	},
+	reducers: {
+		LOGGING_IN: (state, {payload}) => {
+			state.loading = true
+		},
+		LOGIN_SUCCESS: (state, {payload}) => {
+			state.success = true
+			state.loading = false
+			state.hasErrors = false
+		},
+		LOGIN_FAILURE: (state, {payload}) => {
+			state.loading = false
+			state.hasErrors = true
+			state.errMessage = payload
+		},
+	},
 })
 
-export const {loggingIn, loginSucess, loginFailuer} = loginSlice.actions
+export const {LOGGING_IN, LOGIN_SUCCESS, LOGIN_FAILURE} = loginSlice.actions
+
 export default loginSlice.reducer
-export const loginSelector = state => state.login
+export const loginSelector = (state) => state.login
 
-export function loginSubmit (email, password) {
-    return async dispatch =>{
+export function loginSubmit(email, password) {
+	return async (dispatch) => {
+		dispatch(LOGGING_IN())
 
-        dispatch(loggingIn())
-
-        try {
-            const res = await axios.post("/api/user/login", {email, password})
-            localStorage.setItem("token", res.data.token)
-            dispatch(loginSucess())
-            // dispatch(fetchUser())
-
-        } catch (error) {
-            dispatch(loginFailuer(error.response.data.msg))
-        }
-    }
+		try {
+			const res = await axios.post("/api/user/login", {email, password})
+			dispatch(LOGIN_SUCCESS())
+		} catch (error) {
+			dispatch(LOGIN_FAILURE(error.response.data))
+		}
+	}
 }

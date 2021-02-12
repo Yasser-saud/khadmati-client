@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react"
 import styled from "styled-components"
-import UserPic from "../../svg/user-solid.svg"
+import Pic from "../../svg/user-solid.svg"
 
 const Picture = ({register}) => {
 	const [preview, setPreview] = useState()
@@ -29,14 +29,13 @@ const Picture = ({register}) => {
 	return (
 		<Container>
 			<PicContainer>
-				{selectedFile ? <img src={preview} width="185px" height="auto" /> : <UserPic />}
+				{selectedFile ? <img src={preview} width="185px" height="auto" /> : <Pic />}
 			</PicContainer>
 			<input
 				type="file"
 				name="picture"
-				// onChange={onSelectFile}
-				onChange={(e) => console.log(e.target.files)}
-				ref={register}
+				onChange={onSelectFile}
+				// ref={register}
 				placeholder="الصوره"
 				accept="image/*"
 			/>

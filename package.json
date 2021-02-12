@@ -10,9 +10,10 @@
     "@hookform/resolvers": "^1.2.0",
     "@reduxjs/toolkit": "^1.5.0",
     "axios": "^0.21.1",
-    "babel-plugin-inline-react-svg": "^1.1.2",
-    "bootstrap": "^4.6.0",
+    "babel-plugin-inline-react-svg": "^0.5.4",
+    "lodash": "^4.17.20",
     "next": "latest",
+    "prop-types": "^15.7.2",
     "react": "^16.8.0",
     "react-dom": "^16.8.0",
     "react-hook-form": "^6.15.1",
@@ -24,7 +25,17 @@
     "yup": "^0.32.8"
   },
   "devDependencies": {
-    "babel-plugin-styled-components": "^1.8.0"
+    "babel-eslint": "^10.1.0",
+    "babel-plugin-styled-components": "^1.8.0",
+    "eslint": "^7.2.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-prettier": "^7.2.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prettier": "^3.3.1",
+    "eslint-plugin-react": "^7.21.5",
+    "eslint-plugin-react-hooks": "^1.7.0",
+    "prettier": "^2.2.1"
   },
   "license": "MIT"
 }

@@ -1,30 +1,45 @@
-import styled from "styled-components"
-import Link from "next/link"
-import {useEffect} from "react"
-import NavBar from "../components/nav"
-
-import {useSelector, useDispatch} from "react-redux"
-import {userSelector, fetchUser} from "../store/user"
-
+import styled from 'styled-components';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { fetchUser, clearState } from '../store/user';
 const Title = styled.h1`
-	font-size: 50px;
-	color: black;
-`
+  font-size: 50px;
+  color: black;
+`;
 
-export default function Home() {
-	const {loading, userInfo, hasErrors, errMessage, isAuthenticated} = useSelector(userSelector)
-	const dispatch = useDispatch()
+export default function Home({ user }) {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    // router.prefetch("/")
+    if (user) {
+      dispatch(fetchUser(user));
+    } else {
+      dispatch(clearState());
+    }
+  });
+  return (
+    <>
+      <Title>Homee</Title>
+      {user && <h5>{user.email}</h5>}
+    </>
+  );
+}
 
-	useEffect(() => {
-		dispatch(fetchUser())
-	}, [dispatch])
-
-	return (
-		<>
-			<NavBar user={userInfo} loading={loading} isAuthenticated={isAuthenticated} />
-			<Title>Home</Title>
-			{/* {loading && <h1>Loading...</h1>} */}
-			{userInfo != null ? <h1>{userInfo.email}</h1> : "no email"}
-		</>
-	)
+export async function getServerSideProps(context) {
+  const headers = context.req?.headers;
+  try {
+    const res = await fetch('http://localhost:5000/api/user/get-user', {
+      headers,
+    });
+    const user = await res.json();
+    return {
+      props: {
+        user: user,
+      },
+    };
+  } catch (error) {
+    return {
+      props: {},
+    };
+  }
 }

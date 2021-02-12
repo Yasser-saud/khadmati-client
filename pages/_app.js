@@ -1,12 +1,66 @@
-import {createGlobalStyle} from "styled-components"
-import Head from "next/head"
-import axios from "axios"
-import {Provider} from "react-redux"
-import {PersistGate} from "redux-persist/integration/react"
-import {persistor, store} from "../store/persistor"
+import { createGlobalStyle } from 'styled-components';
+import Head from 'next/head';
+import axios from 'axios';
+import { Provider } from 'react-redux';
+import { useState } from 'react';
+import { PersistGate } from 'redux-persist/integration/react';
+import Nav from '../components/nav';
+import Footer from '../components/footer';
+import { persistor, store } from '../store/persist';
 
-axios.defaults.withCredentials = true
-axios.defaults.baseURL = "http://localhost:5000"
+// const store = configureStore({
+// 	reducer: rootReducer,
+// })
+
+axios.defaults.baseURL = 'http://localhost:5000';
+axios.defaults.withCredentials = true;
+
+export default function App({ Component, pageProps }) {
+  return (
+    <>
+      <Head>
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+          crossorigin="anonymous"
+        ></link>
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Tajawal"
+        />
+      </Head>
+
+      <GlobalStyle />
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <Nav />
+          <Component {...pageProps} />
+          <Footer />
+        </PersistGate>
+      </Provider>
+    </>
+  );
+}
+
+App.getInitialProps = async (ctx) => {
+  const cookie = ctx.req?.headers.cookie;
+  try {
+    const res = await fetch('http://localhost:5000/api/user/get-user', {
+      headers: {
+        cookie: cookie,
+      },
+    });
+    const user = await res.json();
+    return {
+      user: user,
+    };
+  } catch (error) {
+    return {};
+  }
+};
+
+// global style
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -28,28 +82,4 @@ const GlobalStyle = createGlobalStyle`
   p{
     margin: 0;
   }
-`
-
-export default function App({Component, pageProps}) {
-	return (
-		<>
-			<Head>
-				<link
-					href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
-					rel="stylesheet"
-					integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
-					crossorigin="anonymous"
-				></link>
-				<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tajawal" />
-			</Head>
-
-			<GlobalStyle />
-
-			<Provider store={store}>
-				<PersistGate loading={null} persistor={persistor}>
-					<Component {...pageProps} />
-				</PersistGate>
-			</Provider>
-		</>
-	)
-}
+`;
