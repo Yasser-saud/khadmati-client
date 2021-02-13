@@ -23,4 +23,4 @@ const Container = styled.div`
   flex-direction: column;
 `;
 
-export default withAuth(index, false, true);
+export default index;

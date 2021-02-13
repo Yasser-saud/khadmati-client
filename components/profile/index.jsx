@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Card from './Card';
 import EditForm from './editForm';
 import withAuth from '../auth';
+import axios from 'axios';
 
 const profile = () => {
   const [edit, setEdit] = useState(false);
@@ -55,5 +56,5 @@ const EditBtn = styled.div`
     filter: brightness(0.9);
   }
 `;
-export default withAuth(profile, true, false);
-// export default withAuth(profile, 'publicRoute');
+
+export default profile;

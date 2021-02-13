@@ -43,23 +43,6 @@ export default function App({ Component, pageProps }) {
   );
 }
 
-App.getInitialProps = async (ctx) => {
-  const cookie = ctx.req?.headers.cookie;
-  try {
-    const res = await fetch('http://localhost:5000/api/user/get-user', {
-      headers: {
-        cookie: cookie,
-      },
-    });
-    const user = await res.json();
-    return {
-      user: user,
-    };
-  } catch (error) {
-    return {};
-  }
-};
-
 // global style
 
 const GlobalStyle = createGlobalStyle`
