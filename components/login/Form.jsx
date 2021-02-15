@@ -17,18 +17,24 @@ const Form = () => {
   const { register, errors, handleSubmit } = useForm();
   const [error, setError] = useState('');
 
+  const API = axios.create({
+    withCredentials: true,
+    baseURL: 'https://khadmati-server.herokuapp.com',
+  });
+
   const onSubmit = async ({ email, password }) => {
     try {
-      const res = await axios.post(
-        '/api/user/login',
-        { email, password },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          // withCredentials: true,
-        }
-      );
+      // const res = await axios.post(
+      //   '/api/user/login',
+      //   { email, password },
+      //   {
+      //     headers: {
+      //       'Content-Type': 'application/json',
+      //     },
+      //     // withCredentials: true,
+      //   }
+      // );
+      const res = API.get('/api/user/login', { email, password });
       // const res = await fetch(
       //   'https://khadmati-server.herokuapp.com/api/user/login',
       //   {
