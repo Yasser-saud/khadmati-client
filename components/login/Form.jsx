@@ -22,7 +22,12 @@ const Form = () => {
       const res = await axios.post(
         '/api/user/login',
         { email, password },
-        { withCredentials: true }
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          withCredentials: true,
+        }
       );
       // const res = await fetch(
       //   'https://khadmati-server.herokuapp.com/api/user/login',
