@@ -10,7 +10,7 @@ import { Router } from 'next/router';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 
-axios.defaults.baseURL = 'https://khadmati-server.herokuapp.com';
+// axios.defaults.baseURL = 'https://khadmati-server.herokuapp.com';
 // axios.defaults.baseURL = 'http://localhost:5000';
 // axios.defaults.withCredentials = true;
 
