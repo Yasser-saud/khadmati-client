@@ -2,18 +2,33 @@ import { createGlobalStyle } from 'styled-components';
 import Head from 'next/head';
 import axios from 'axios';
 import { Provider } from 'react-redux';
-import { useState } from 'react';
 import { PersistGate } from 'redux-persist/integration/react';
 import Nav from '../components/nav';
 import Footer from '../components/footer';
 import { persistor, store } from '../store/persist';
+import { Router } from 'next/router';
+import NProgress from 'nprogress';
+import 'nprogress/nprogress.css';
 
-// const store = configureStore({
-// 	reducer: rootReducer,
-// })
+axios.defaults.baseURL = 'https://khadmati-server.herokuapp.com';
+// axios.defaults.baseURL = 'http://localhost:5000';
+// axios.defaults.withCredentials = true;
 
-axios.defaults.baseURL = 'http://localhost:5000';
-axios.defaults.withCredentials = true;
+NProgress.configure({
+  showSpinner: false,
+  trickleRate: 0.8,
+  trickleSpeed: 500,
+});
+
+Router.events.on('routeChangeStart', () => {
+  NProgress.start({});
+});
+Router.events.on('routeChangeComplete', () => {
+  NProgress.done();
+});
+Router.events.on('routerChangeError', () => {
+  NProgress.done();
+});
 
 export default function App({ Component, pageProps }) {
   return (
@@ -23,7 +38,7 @@ export default function App({ Component, pageProps }) {
           href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
           rel="stylesheet"
           integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
-          crossorigin="anonymous"
+          crossOrigin="anonymous"
         ></link>
         <link
           rel="stylesheet"
@@ -47,9 +62,7 @@ export default function App({ Component, pageProps }) {
 
 const GlobalStyle = createGlobalStyle`
   body {
-    background-color: #ffffff;
-	background-color: #ffffff;
-	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='99' height='99' viewBox='0 0 200 200'%3E%3Cpolygon fill='%235c73f2' fill-opacity='0.01' points='100 0 0 100 100 100 100 200 200 100 200 0'/%3E%3C/svg%3E");
+    background-color: #fdfdfd;
     margin: 0;
     padding: 0;
     box-sizing: border-box;

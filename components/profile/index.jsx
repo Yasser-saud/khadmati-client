@@ -2,10 +2,8 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import Card from './Card';
 import EditForm from './editForm';
-import withAuth from '../auth';
-import axios from 'axios';
 
-const profile = () => {
+const profile = ({ profile }) => {
   const [edit, setEdit] = useState(false);
 
   return (
@@ -13,7 +11,11 @@ const profile = () => {
       <ProfileTag>الملف الشخصي</ProfileTag>
       <hr />
       <CardWrapper>
-        {edit ? <Card /> : <EditForm />}
+        {edit ? (
+          <EditForm profile={profile} setEdit={setEdit} />
+        ) : (
+          <Card profile={profile} />
+        )}
 
         <EditBtn edit={edit} onClick={() => setEdit(!edit)}>
           {edit ? 'الغاء' : 'تعديل البيانات'}
@@ -39,19 +41,18 @@ const CardWrapper = styled.div`
 
 const EditBtn = styled.div`
   margin-top: 50px;
-  width: 185px;
+  width: 200px;
   height: 66px;
   background: ${(props) => (props.edit ? '#EB5353' : '#5C73F2')};
-  box-shadow: 0px 4px 16px rgba(102, 102, 102, 0.15);
-  border-radius: 4px;
+  box-shadow: 1px 2px 4px rgba(102, 102, 102, 0.15);
+  border-radius: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 24px;
+  font-size: 1.6rem;
   color: white;
   cursor: pointer;
-  transition: 0.1s ease-in;
-
+  transition: 0.1s ease-out;
   &:hover {
     filter: brightness(0.9);
   }

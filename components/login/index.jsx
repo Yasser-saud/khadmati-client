@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import Form from './Form';
-import withAuth from '../auth';
 
 const index = () => {
   return (
@@ -12,7 +11,7 @@ const index = () => {
 
 const Container = styled.div`
   width: auto;
-  height: 203px;
+  min-height: 203px;
   position: absolute;
   left: 50%;
   top: 50%;

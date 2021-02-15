@@ -1,44 +1,32 @@
+import axios from 'axios';
 import Profile from '../components/profile';
 
 const profile = ({ profile }) => {
   console.log(profile);
   return (
     <>
-      <h1>{profile?.fullName}</h1>
-      <Profile />
+      <Profile profile={profile} />
     </>
   );
 };
-// profile.getInitialProps = async (context) => {
-//   const headers = context.req?.headers.cookie;
-//   const res = await fetch('http://localhost:5000/api/profile/user-profile', {
-//     headers,
-//   });
-//   const profile = res.json();
 
-//   return {
-//     profile: profile,
-//   };
-// };
-export const getServerSideProps = async (context) => {
-  const cookie = context.req?.headers.cookie;
+export const getServerSideProps = async (ctx) => {
+  const cookie = ctx.req?.headers.cookie;
 
-  const res = await fetch('http://localhost:5000/api/profile/user-profile', {
-    headers: {
-      cookie,
-    },
-  });
-  if (res.status === 401 && context.req) {
+  try {
+    const res = await axios.get('/api/profile/user-profile', {
+      headers: {
+        cookie,
+      },
+    });
+    return {
+      props: {
+        profile: res.data.profile,
+      },
+    };
+  } catch (error) {
     return { redirect: { permanent: false, destination: '/login' } };
-    // return { props: {} }; // crash
   }
-
-  const profile = await res.json();
-  return {
-    props: {
-      profile: profile,
-    },
-  };
 };
 
 export default profile;

@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import Form from './Form';
 import React from 'react';
-import withAuth from '../auth';
 
 const index = () => {
   return (
@@ -13,7 +12,7 @@ const index = () => {
 
 const Container = styled.div`
   width: 355px;
-  height: 254px;
+  min-height: 254px;
   position: absolute;
   left: 50%;
   top: 50%;
@@ -24,4 +23,4 @@ const Container = styled.div`
   flex-direction: column;
 `;
 
-export default withAuth(index, false, true);
+export default index;
