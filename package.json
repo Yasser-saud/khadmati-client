@@ -4,8 +4,8 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start",
-    "ngrok": "ngrok http 3000"
+    "start": "next start -p $PORT",
+    "heroku-postbuild": "npm run build"
   },
   "dependencies": {
     "@hookform/resolvers": "^1.2.0",
