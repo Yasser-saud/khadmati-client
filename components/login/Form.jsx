@@ -19,19 +19,9 @@ const Form = () => {
 
   const onSubmit = async ({ email, password }) => {
     try {
-      const axiosConfig = {
-        headers: {
-          'content-Type': 'application/json',
-          Accept: '/',
-          'Cache-Control': 'no-cache',
-          Cookie: document.cookie,
-        },
-        credentials: 'cross-origin',
-      };
       const res = await axios.post(
         '/api/user/login',
         { email, password },
-        axiosConfig,
         { withCredentials: true }
       );
       // const res = await fetch(
