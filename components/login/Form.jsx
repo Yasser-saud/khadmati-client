@@ -27,7 +27,7 @@ const Form = () => {
             'Content-Type': 'application/json',
             Cookie: 'Set-Cookie',
           },
-          // withCredentials: true,
+          withCredentials: true,
         }
       );
       // const res = await fetch(
