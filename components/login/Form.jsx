@@ -19,33 +19,20 @@ const Form = () => {
 
   const onSubmit = async ({ email, password }) => {
     try {
-      // const axiosConfig = {
-      //   headers: {
-      //     'content-Type': 'application/json',
-      //     Accept: '/',
-      //     'Cache-Control': 'no-cache',
-      //     Cookie: document.cookie,
-      //   },
-      //   credentials: 'same-origin, cross-origin',
-      // };
-      // const res = await axios.post(
-      //   '/api/user/login',
-      //   { email, password },
-      //   { axiosConfig, withCredentials: true }
+      const res = await axios.post('/api/user/login', { email, password });
+      // const res = await fetch(
+      //   'https://khadmati-server.herokuapp.com/api/user/login',
+      //   {
+      //     method: 'POST',
+      //     credentials: 'include',
+      //     headers: {
+      //       'Content-Type': 'application/json',
+      //       // 'Content-Type': 'application/x-www-form-urlencoded',
+      //       Accept: '/',
+      //     },
+      //     body: JSON.stringify({ email, password }),
+      //   }
       // );
-      const res = await fetch(
-        'https://khadmati-server.herokuapp.com/api/user/login',
-        {
-          credentials: 'include',
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            // 'Content-Type': 'application/x-www-form-urlencoded',
-            Accept: '/',
-          },
-          body: JSON.stringify({ email, password }),
-        }
-      );
       console.log(res);
       router.push('/');
     } catch (error) {

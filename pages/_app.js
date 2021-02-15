@@ -12,7 +12,7 @@ import 'nprogress/nprogress.css';
 
 axios.defaults.baseURL = 'https://khadmati-server.herokuapp.com';
 // axios.defaults.baseURL = 'http://localhost:5000';
-// axios.defaults.withCredentials = true;
+axios.defaults.withCredentials = true;
 
 NProgress.configure({
   showSpinner: false,
