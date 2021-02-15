@@ -33,7 +33,7 @@ export async function getServerSideProps(context) {
     //   headers,
     // });
     const res = await fetch('http://localhost:5000/api/user/get-user', {
-      // credentials: 'include',
+      credentials: 'include',
       // method: 'GET',
       headers,
     });
