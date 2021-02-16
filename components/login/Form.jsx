@@ -18,7 +18,7 @@ const Form = () => {
   const [error, setError] = useState('');
 
   const API = axios.create({
-    baseURL: 'http://localhost:5000',
+    baseURL: 'https://khadmati-server.herokuapp.com',
     withCredentials: true,
   });
 
