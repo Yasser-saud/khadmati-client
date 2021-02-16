@@ -34,7 +34,15 @@ const Form = () => {
       //     // withCredentials: true,
       //   }
       // );
-      const res = await API.post('/api/user/login', { email, password });
+      const res = await API.post(
+        '/api/user/login',
+        { email, password },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
       // const res = await fetch(
       //   'https://khadmati-server.herokuapp.com/api/user/login',
       //   {
