@@ -34,20 +34,20 @@ const Form = () => {
       //     // withCredentials: true,
       //   }
       // );
-      // const res = await API.post('/api/user/login', { email, password });
-      const res = await fetch(
-        'https://khadmati-server.herokuapp.com/api/user/login',
-        {
-          method: 'POST',
-          credentials: 'same-origin',
-          headers: {
-            'Content-Type': 'application/json',
-            // 'Content-Type': 'application/x-www-form-urlencoded',
-            Accept: '/',
-          },
-          body: JSON.stringify({ email, password }),
-        }
-      );
+      const res = await API.post('/api/user/login', { email, password });
+      // const res = await fetch(
+      //   'https://khadmati-server.herokuapp.com/api/user/login',
+      //   {
+      //     method: 'POST',
+      //     credentials: 'same-origin',
+      //     headers: {
+      //       'Content-Type': 'application/json',
+      //       // 'Content-Type': 'application/x-www-form-urlencoded',
+      //       Accept: '/',
+      //     },
+      //     body: JSON.stringify({ email, password }),
+      //   }
+      // );
       console.log(res);
       router.push('/');
     } catch (error) {
