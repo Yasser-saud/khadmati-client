@@ -2,15 +2,15 @@ import Link from 'next/link';
 import router from 'next/router';
 import styled from 'styled-components';
 import axios from 'axios';
-import { userSelector, logout } from '../../store/user';
-import { useDispatch } from 'react-redux';
+import { useRecoilState } from 'recoil';
+import { userState } from '../../context/recoilStates';
 
 const NavProfileIcon = () => {
-  const dispatch = useDispatch();
-
+  const [, setUser] = useRecoilState(userState);
   const logoutUser = async () => {
     try {
-      await dispatch(logout());
+      const res = await axios.get('/api/user/logout');
+      setUser(null);
       router.push('/');
     } catch (error) {
       console.log(error);

@@ -3,16 +3,31 @@ import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
 import NavProfilePic from './NavProfileIcon';
 import { useInView } from 'react-intersection-observer';
-import { useSelector } from 'react-redux';
-import { userSelector } from '../../store/user';
+import { useRecoilState } from 'recoil';
+import { userState } from '../../context/recoilStates';
 import router from 'next/router';
 
 const index = () => {
   const [nav, setNav] = useState(false);
-  const { userInfo } = useSelector(userSelector);
+  const [user, setUser] = useRecoilState(userState);
+
+  useEffect(() => {
+    let mounted = true;
+    if (mounted) {
+      const userData = sessionStorage.getItem('khadmati-user');
+      if (userData) {
+        setUser(userData);
+      }
+    }
+    return function cleanup() {
+      mounted = false;
+    };
+  }, []);
+
   const { ref, inView, entry } = useInView({
     threshold: 0,
   });
+
   if (typeof window !== 'undefined') {
     const checkWindow = () => {
       const ws = window.scrollY;
@@ -24,13 +39,14 @@ const index = () => {
     };
     window.addEventListener('scroll', checkWindow);
   }
+
   return (
     <>
       {router.pathname !== '/login' ? (
         <Nav ref={ref} ws={nav} className="container sticky-top">
           <LeftWrapper ws={nav}>
-            {userInfo ? (
-              <NavProfilePic />
+            {user ? (
+              <NavProfilePic user={user} />
             ) : (
               <>
                 <Link href="/register">

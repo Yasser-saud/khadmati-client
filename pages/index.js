@@ -1,8 +1,9 @@
 import styled from 'styled-components';
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { fetchUser, clearState } from '../store/user';
 import axios from 'axios';
+import Nav from '../components/nav';
+import { useEffect } from 'react';
+import { useRecoilState } from 'recoil';
+import { userState } from '../context/recoilStates';
 
 const Title = styled.h1`
   font-size: 50px;
@@ -10,14 +11,18 @@ const Title = styled.h1`
 `;
 
 export default function Home({ user }) {
-  const dispatch = useDispatch();
+  const [, setUser] = useRecoilState(userState);
+
   useEffect(() => {
-    if (user) {
-      dispatch(fetchUser(user));
+    if (user != null) {
+      setUser(user);
+      sessionStorage.setItem('khadmati-user', JSON.stringify(user));
     } else {
-      dispatch(clearState());
+      setUser(null);
+      sessionStorage.removeItem('khadmati-user');
     }
-  });
+  }, []);
+
   return (
     <>
       <Title>Homee</Title>
@@ -29,25 +34,23 @@ export default function Home({ user }) {
 
 export async function getServerSideProps(context) {
   const headers = context.req?.headers;
+
   try {
-    // const res = await axios.get('/api/user/get-user', {
-    //   headers,
-    // });
-    const res = await fetch('http://localhost:5000/api/user/get-user', {
-      credentials: 'include',
-      // method: 'GET',
+    const session = await axios({
+      method: 'GET',
+      url: '/api/user/get-user',
       headers,
     });
-    const data = await res.json();
     return {
       props: {
-        user: data,
+        user: session.data,
       },
     };
   } catch (error) {
-    console.log(error);
     return {
-      props: {},
+      props: {
+        user: null,
+      },
     };
   }
 }

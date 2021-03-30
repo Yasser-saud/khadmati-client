@@ -9,10 +9,12 @@ import { persistor, store } from '../store/persist';
 import { Router } from 'next/router';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
+import { RecoilRoot, useRecoilState } from 'recoil';
+import { userState } from '../context/recoilStates';
 
 // axios.defaults.baseURL = 'https://khadmati-server.herokuapp.com';
-// axios.defaults.baseURL = 'http://localhost:5000';
-// axios.defaults.withCredentials = true;
+axios.defaults.baseURL = 'http://localhost:5000';
+axios.defaults.withCredentials = true;
 
 NProgress.configure({
   showSpinner: false,
@@ -49,9 +51,11 @@ export default function App({ Component, pageProps }) {
       <GlobalStyle />
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <Nav />
-          <Component {...pageProps} />
-          <Footer />
+          <RecoilRoot>
+            <Nav />
+            <Component {...pageProps} />
+            <Footer />
+          </RecoilRoot>
         </PersistGate>
       </Provider>
     </>
