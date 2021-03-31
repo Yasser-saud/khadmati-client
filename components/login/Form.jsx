@@ -19,23 +19,10 @@ const Form = () => {
 
   const onSubmit = async ({ email, password }) => {
     try {
-      // const res = await axios.post(
-      //   '/api/user/login',
-      //   { email, password },
-      //   { withCredentials: true }
-      // );
-      const res = await fetch(
-        'https://khadmati-server.herokuapp.com/api/user/login',
-        {
-          method: 'POST',
-          // credentials: 'include',
-          headers: {
-            'Content-Type': 'application/json',
-            // 'Content-Type': 'application/x-www-form-urlencoded',
-            Accept: '/',
-          },
-          body: JSON.stringify({ email, password }),
-        }
+      const res = await axios.post(
+        '/api/user/login',
+        { email, password },
+        { withCredentials: true }
       );
       router.push('/');
     } catch (error) {
