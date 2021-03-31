@@ -28,7 +28,7 @@ const Form = () => {
         'https://khadmati-server.herokuapp.com/api/user/login',
         {
           method: 'POST',
-          credentials: 'include',
+          // credentials: 'include',
           headers: {
             'Content-Type': 'application/json',
             // 'Content-Type': 'application/x-www-form-urlencoded',
