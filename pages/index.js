@@ -26,7 +26,7 @@ export default function Home({ user }) {
   return (
     <>
       <Title>Homee</Title>
-      <h1>CORS</h1>
+      <h1>CORSS</h1>
       {user && <h5>{user.email}</h5>}
     </>
   );

@@ -24,6 +24,7 @@ const Form = () => {
         { email, password },
         { withCredentials: true }
       );
+      console.log(res);
       router.push('/');
     } catch (error) {
       console.log(error);
