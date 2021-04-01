@@ -13,8 +13,8 @@ import { RecoilRoot, useRecoilState } from 'recoil';
 import { userState } from '../context/recoilStates';
 
 // axios.defaults.baseURL = 'https://khadmati-server.herokuapp.com';
-axios.defaults.baseURL = 'http://localhost:3000';
-// axios.defaults.baseURL = 'https://angry-albattani-231cdc.netlify.app';
+// axios.defaults.baseURL = 'http://localhost:3000';
+axios.defaults.baseURL = 'https://khadmati-full.herokuapp.com';
 // axios.defaults.withCredentials = true;
 
 NProgress.configure({
