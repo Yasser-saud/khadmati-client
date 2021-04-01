@@ -17,7 +17,7 @@ app.prepare().then(() => {
   server.use(
     cookieSession({
       name: 'session',
-      keys: ['test'],
+      keys: ['testt'],
       maxAge: 3600000,
       sameSite: true,
     })
