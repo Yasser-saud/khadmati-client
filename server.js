@@ -1,15 +1,16 @@
 const express = require('express');
 const next = require('next');
-const routes = require('./routes');
 const port = parseInt(process.env.PORT, 10) || 3000;
 const dev = process.env.NODE_ENV !== 'production';
-const app = next({ dev });
+// const app = next({ dev });
+const app = next({ dev: false });
 const handle = app.getRequestHandler();
 const cookieSession = require('cookie-session');
 const dotenv = require('dotenv');
 dotenv.config();
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
+
 ////
 app.prepare().then(() => {
   const server = express();
@@ -18,7 +19,6 @@ app.prepare().then(() => {
       name: 'session',
       keys: ['test'],
       maxAge: 3600000,
-      // secure: true,
       sameSite: true,
     })
   );
@@ -32,10 +32,8 @@ app.prepare().then(() => {
   server.use(express.urlencoded({ extended: false }));
   server.use(express.json());
   server.use(cookieParser());
+
   server.use('/api/user', require('./server_files/routes/userRoutes'));
-  server.get('/api/test', (req, res) => {
-    res.status(200).json({ msg: 'wowrking' });
-  });
 
   server.all('*', (req, res) => {
     return handle(req, res);
