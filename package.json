@@ -4,8 +4,7 @@
   "scripts": {
     "dev": "nodemon server.js",
     "build": "next build",
-    "start": "cross-env NODE_ENV=production node server.js",
-    "heroku-postbuild": "npm run build"
+    "start": "cross-env NODE_ENV=production node server.js"
   },
   "dependencies": {
     "@hookform/resolvers": "^1.2.0",
