@@ -12,14 +12,15 @@ const profile = ({ profile }) => {
 };
 
 export const getServerSideProps = async (ctx) => {
-  const cookie = ctx.req?.headers.cookie;
+  const headers = ctx.req?.headers;
 
   try {
-    const res = await axios.get('/api/profile/user-profile', {
-      headers: {
-        cookie,
-      },
+    const res = await axios({
+      method: 'GET',
+      url: '/api/profile/user-profile',
+      headers,
     });
+    console.log(res);
     return {
       props: {
         profile: res.data.profile,
