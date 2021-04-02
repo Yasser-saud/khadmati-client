@@ -2,10 +2,27 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import Card from './Card';
 import EditForm from './editForm';
+import axios from 'axios';
+import useSWR from 'swr';
 
-const profile = ({ profile }) => {
+const fetchProfile = async (url) => {
+  const res = await axios.get(url);
+  return res.data;
+};
+
+const profile = () => {
   const [edit, setEdit] = useState(false);
 
+  const { data, error } = useSWR('/api/profile/user-profile', fetchProfile);
+
+  if (error) {
+    return <h1>ERROR</h1>;
+  }
+  if (!data) {
+    return <h1>LOADING . . .</h1>;
+  }
+  const profile = data.profile;
+  console.log(data);
   return (
     <div className="container mt-5">
       <ProfileTag>الملف الشخصي</ProfileTag>
