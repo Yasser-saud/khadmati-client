@@ -8,8 +8,8 @@ import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 import { RecoilRoot } from 'recoil';
 
-// axios.defaults.baseURL = 'http://localhost:3000';
-axios.defaults.baseURL = 'https://khadmati-full.herokuapp.com';
+axios.defaults.baseURL = 'http://localhost:3000';
+// axios.defaults.baseURL = 'https://khadmati-full.herokuapp.com';
 
 NProgress.configure({
   showSpinner: false,

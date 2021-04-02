@@ -14,18 +14,18 @@ const Card = ({ profile }) => {
         </ProfPicWrapper>
       </Picture>
 
-      <UserNameContainer>{profile.fullName}</UserNameContainer>
+      <UserNameContainer>{profile?.fullName}</UserNameContainer>
 
       <hr />
       <InputFields>
-        <p>المدينة: {profile.city}</p>
-        <p>المنطقة: {profile.district}</p>
+        <p>المدينة: {profile?.city}</p>
+        <p>المنطقة: {profile?.district}</p>
       </InputFields>
 
       <Contact>تواصل معي</Contact>
 
       <IconsWrapper>
-        {profile.twitterAcc !== null ? (
+        {profile?.twitterAcc !== null ? (
           <a
             href={`https://twitter.com/${profile.twitterAcc}`}
             target="_blank"
@@ -35,7 +35,7 @@ const Card = ({ profile }) => {
           </a>
         ) : null}
 
-        {profile.whatsappAcc !== null ? (
+        {profile?.whatsappAcc !== null ? (
           <a
             href={`https://wa.me/${profile.whatsappAcc}`}
             target="_blank"
@@ -44,7 +44,7 @@ const Card = ({ profile }) => {
             <Icons icon={<WhatsApp />} />{' '}
           </a>
         ) : null}
-        {profile.instagramAcc !== null ? (
+        {profile?.instagramAcc !== null ? (
           <a
             href={`https://www.instagram.com/${profile.instagramAcc}`}
             target="_blank"
