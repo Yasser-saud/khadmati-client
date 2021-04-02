@@ -9,18 +9,12 @@ const dotenv = require('dotenv');
 dotenv.config();
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
-
+const passport = require('passport');
+require('./server_files/config/passport');
 ////
 app.prepare().then(() => {
   const server = express();
-  server.use(
-    cookieSession({
-      name: 'session',
-      keys: ['testt'],
-      maxAge: 3600000,
-      sameSite: true,
-    })
-  );
+
   mongoose.connect(
     process.env.DB_URI,
     { useNewUrlParser: true, useUnifiedTopology: true },
@@ -31,8 +25,10 @@ app.prepare().then(() => {
   server.use(express.urlencoded({ extended: false }));
   server.use(express.json());
   server.use(cookieParser());
+  server.use(passport.initialize());
 
   server.use('/api/user', require('./server_files/routes/userRoutes'));
+  server.use('/api/profile', require('./server_files/routes/profileRoutes'));
 
   server.all('*', (req, res) => {
     return handle(req, res);

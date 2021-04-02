@@ -5,12 +5,12 @@ import NavProfilePic from './NavProfileIcon';
 import { useInView } from 'react-intersection-observer';
 import { useRecoilState } from 'recoil';
 import { userState } from '../../context/recoilStates';
-import router from 'next/router';
+import { useRouter } from 'next/router';
 
 const index = () => {
   const [nav, setNav] = useState(false);
   const [user, setUser] = useRecoilState(userState);
-
+  const router = useRouter();
   useEffect(() => {
     let mounted = true;
     if (mounted) {

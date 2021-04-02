@@ -1,21 +1,15 @@
 import { createGlobalStyle } from 'styled-components';
 import Head from 'next/head';
 import axios from 'axios';
-import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react';
 import Nav from '../components/nav';
 import Footer from '../components/footer';
-import { persistor, store } from '../store/persist';
 import { Router } from 'next/router';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
-import { RecoilRoot, useRecoilState } from 'recoil';
-import { userState } from '../context/recoilStates';
+import { RecoilRoot } from 'recoil';
 
-// axios.defaults.baseURL = 'https://khadmati-server.herokuapp.com';
-// axios.defaults.baseURL = 'http://localhost:3000';
-axios.defaults.baseURL = 'https://khadmati-full.herokuapp.com';
-// axios.defaults.withCredentials = true;
+axios.defaults.baseURL = 'http://localhost:3000';
+// axios.defaults.baseURL = 'https://khadmati-full.herokuapp.com';
 
 NProgress.configure({
   showSpinner: false,
@@ -50,15 +44,12 @@ export default function App({ Component, pageProps }) {
       </Head>
 
       <GlobalStyle />
-      <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-          <RecoilRoot>
-            <Nav />
-            <Component {...pageProps} />
-            <Footer />
-          </RecoilRoot>
-        </PersistGate>
-      </Provider>
+
+      <RecoilRoot>
+        <Nav />
+        <Component {...pageProps} />
+        <Footer />
+      </RecoilRoot>
     </>
   );
 }

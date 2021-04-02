@@ -2,8 +2,8 @@ const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const Profile = require('../models/Profile');
-
-const registerUser = async (req, res) => {
+const cookie = require('cookie');
+const register = async (req, res) => {
   const { email, password } = req.body;
 
   // check if user is registered
@@ -46,7 +46,7 @@ const registerUser = async (req, res) => {
   }
 };
 
-const loginUser = async (req, res) => {
+const login = async (req, res) => {
   const { email, password } = req.body;
 
   // check if there's a user with that email
@@ -56,19 +56,19 @@ const loginUser = async (req, res) => {
       const isMatch = await bcrypt.compare(password, user.password);
       if (isMatch) {
         const token = jwt.sign({ userID: user._id }, process.env.JWT_SECRET, {
-          expiresIn: 900,
+          expiresIn: 1800,
         });
-        // res.setHeader(
-        // 	'set-cookie',
-        // 	cookie.serialize('token', token, {
-        // 		httpOnly: true,
-        // 		sameSite: 'None',
-        // 		// secure: true,
-        // 		maxAge: 900,
-        // 		path: '/',
-        // 	}),
-        // );
-        req.session.user = user._id;
+        res.setHeader(
+          'set-cookie',
+          cookie.serialize('token', token, {
+            httpOnly: true,
+            sameSite: true,
+            // secure: true,
+            maxAge: 1800,
+            path: '/',
+          })
+        );
+        // req.session.user = user._id;
         return res.status(200).json({ login: 'sucess' });
       } else {
         return res.status(400).json({ msg: 'كلمة المرور خطأ' });
@@ -85,22 +85,22 @@ const loginUser = async (req, res) => {
 
 //logout
 const logout = (req, res) => {
-  // res.setHeader(
-  // 	'Set-Cookie',
-  // 	cookie.serialize('token', null, {
-  // 		httpOnly: true,
-  // 		sameSite: 'none',
-  // 		secure: true,
-  // 		maxAge: -900,
-  // 		path: '/',
-  // 	}),
-  // );
+  res.setHeader(
+    'Set-Cookie',
+    cookie.serialize('token', null, {
+      httpOnly: true,
+      sameSite: 'none',
+      secure: true,
+      maxAge: -900,
+      path: '/',
+    })
+  );
   res.status(200).json({ logout: 'sucess' });
 };
 
 // get user info
-const getUser = async (req, res) => {
+const currentUser = async (req, res) => {
   return res.status(200).json(req.user);
 };
 
-module.exports = { registerUser, loginUser, getUser, logout };
+module.exports = { register, login, currentUser, logout };

@@ -4,12 +4,10 @@ import { useForm } from 'react-hook-form';
 import EmailIcon from '../svg/envelope.svg';
 import KeyIcon from '../svg/key.svg';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { loginSubmit, loginSelector } from '../../store/loginSlice';
-import { useDispatch, useSelector } from 'react-redux';
 
 /////
 const Form = () => {

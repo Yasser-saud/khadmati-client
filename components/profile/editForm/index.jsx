@@ -8,7 +8,7 @@ import ServicesInfo from './ServicesInfo';
 import Picture from './Picture';
 import { schema } from './validation';
 import axios from 'axios';
-import { pickBy, mapValues } from 'lodash';
+import { mapValues } from 'lodash';
 import router from 'next/router';
 
 const index = ({ setEdit, profile }) => {
