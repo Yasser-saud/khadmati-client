@@ -3,6 +3,7 @@ import Profile from '../components/profile';
 import Nav from '../components/nav';
 
 const profile = ({ profile }) => {
+  console.log(profile);
   return (
     <>
       <Profile profile={profile} />
