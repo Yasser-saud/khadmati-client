@@ -1,6 +1,5 @@
-import axios from 'axios';
 import Profile from '../components/profile';
-import useSWR from 'swr';
+import { profileProtect } from '../components/serverSideAuth';
 
 const profile = () => {
   return (
@@ -9,7 +8,7 @@ const profile = () => {
     </>
   );
 };
-
+export const getServerSideProps = profileProtect();
 // export const getServerSideProps = async (ctx) => {
 //   const headers = ctx.req?.headers;
 
