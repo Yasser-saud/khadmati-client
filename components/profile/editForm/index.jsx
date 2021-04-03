@@ -9,12 +9,12 @@ import Picture from './Picture';
 import { schema } from './validation';
 import axios from 'axios';
 import { mapValues } from 'lodash';
-import router from 'next/router';
-
+import { useRouter } from 'next/router';
+import { mutate } from 'swr';
 const index = ({ setEdit, profile }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-
+  const router = useRouter();
   const { register, handleSubmit, errors } = useForm({
     resolver: yupResolver(schema),
   });
@@ -26,7 +26,7 @@ const index = ({ setEdit, profile }) => {
     try {
       const res = await axios.patch('/api/profile/update-profile', finalValues);
       setLoading(false);
-      router.push('/profile');
+      mutate('/api/profile/user-profile');
       setEdit(false);
       console.log(res.data.message);
     } catch (error) {
