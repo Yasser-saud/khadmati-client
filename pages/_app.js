@@ -13,6 +13,7 @@ import 'tailwindcss/tailwind.css';
 // axios.defaults.baseURL = 'http://localhost:3000';
 axios.defaults.baseURL = 'https://www.khadmati.xyz';
 axios.defaults.withCredentials = true;
+
 NProgress.configure({
   showSpinner: false,
   trickleRate: 0.8,
