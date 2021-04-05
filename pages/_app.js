@@ -7,9 +7,11 @@ import { Router } from 'next/router';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 import { RecoilRoot } from 'recoil';
+import React from 'react';
+import 'tailwindcss/tailwind.css';
 
 // axios.defaults.baseURL = 'http://localhost:3000';
-axios.defaults.baseURL = 'https://khadmati-full.herokuapp.com';
+axios.defaults.baseURL = 'https://www.khadmati.xyz';
 
 NProgress.configure({
   showSpinner: false,
@@ -32,12 +34,6 @@ export default function App({ Component, pageProps }) {
     <>
       <Head>
         <link
-          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
-          rel="stylesheet"
-          integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
-          crossOrigin="anonymous"
-        ></link>
-        <link
           rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Tajawal"
         />
@@ -47,6 +43,7 @@ export default function App({ Component, pageProps }) {
 
       <RecoilRoot>
         <Nav />
+
         <Component {...pageProps} />
         <Footer />
       </RecoilRoot>

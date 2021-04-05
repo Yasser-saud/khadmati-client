@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import PersonalInfo from './PersonalInfo';
@@ -11,6 +11,8 @@ import axios from 'axios';
 import { mapValues } from 'lodash';
 import { useRouter } from 'next/router';
 import { mutate } from 'swr';
+import tw from 'twin.macro';
+
 const index = ({ setEdit, profile }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -45,7 +47,12 @@ const index = ({ setEdit, profile }) => {
         <Picture register={register} errors={errors} />
       </Form>
 
-      <Button disabled={loading ? true : ''} form="form" type="submit">
+      <Button
+        css={[loading && tw`animate-spin`]}
+        disabled={loading ? true : ''}
+        form="form"
+        type="submit"
+      >
         {loading ? 'دقيقه....' : 'حفظ البيانات'}
       </Button>
     </Container>
@@ -83,5 +90,6 @@ const Button = styled.button`
   &:hover {
     filter: brightness(0.9);
   }
+  ${tw`focus:ring-4`}
 `;
 export default index;

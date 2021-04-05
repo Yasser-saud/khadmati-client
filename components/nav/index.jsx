@@ -9,19 +9,14 @@ import { useRouter } from 'next/router';
 
 const index = () => {
   const [nav, setNav] = useState(false);
+
   const [user, setUser] = useRecoilState(userState);
+  const [loading, setLoading] = useState(true);
+
   const router = useRouter();
+
   useEffect(() => {
-    let mounted = true;
-    if (mounted) {
-      const userData = sessionStorage.getItem('khadmati-user');
-      if (userData) {
-        setUser(userData);
-      }
-    }
-    return function cleanup() {
-      mounted = false;
-    };
+    setLoading(false);
   }, []);
 
   const { ref, inView, entry } = useInView({
@@ -40,38 +35,39 @@ const index = () => {
     window.addEventListener('scroll', checkWindow);
   }
 
-  return (
-    <>
-      {router.pathname !== '/login' ? (
-        <Nav ref={ref} ws={nav} className="container sticky-top">
-          <LeftWrapper ws={nav}>
-            {user ? (
-              <NavProfilePic user={user} />
-            ) : (
-              <>
-                <Link href="/register">
-                  <a>تسجيل</a>
-                </Link>
-                <hr />
-                <Link href="/login">
-                  <a>دخول</a>
-                </Link>
-              </>
-            )}
-          </LeftWrapper>
+  // if (loading) {
+  //   return <></>;
+  // }
 
-          <RightWrapper ws={nav}>
-            <Logo>
-              <Link href="/">
-                <a>خدماتي</a>
-              </Link>
-            </Logo>
-          </RightWrapper>
-        </Nav>
+  return (
+    <Nav ref={ref} ws={nav} className="container mx-auto sticky top-0 z-40">
+      {loading ? (
+        <LeftWrapper />
       ) : (
-        <div></div>
+        <LeftWrapper ws={nav}>
+          {user ? (
+            <NavProfilePic user={user} />
+          ) : (
+            <>
+              <Link href="/register">
+                <a>تسجيل</a>
+              </Link>
+              <hr />
+              <Link href="/login">
+                <a>دخول</a>
+              </Link>
+            </>
+          )}
+        </LeftWrapper>
       )}
-    </>
+      <RightWrapper ws={nav}>
+        <Logo>
+          <Link href="/">
+            <a>خدماتي</a>
+          </Link>
+        </Logo>
+      </RightWrapper>
+    </Nav>
   );
 };
 

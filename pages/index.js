@@ -41,7 +41,6 @@ export async function getServerSideProps(context) {
       url: '/api/user/get-user',
       headers,
     });
-    console.log(session);
     return {
       props: {
         user: session.data,
