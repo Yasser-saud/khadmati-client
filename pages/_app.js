@@ -10,8 +10,8 @@ import { RecoilRoot } from 'recoil';
 import React from 'react';
 import 'tailwindcss/tailwind.css';
 
-// axios.defaults.baseURL = 'http://localhost:3000';
-axios.defaults.baseURL = 'https://www.khadmati.xyz';
+axios.defaults.baseURL = 'http://localhost:5000';
+// axios.defaults.baseURL = 'https://www.khadmati.xyz';
 axios.defaults.withCredentials = true;
 
 NProgress.configure({
@@ -40,11 +40,9 @@ export default function App({ Component, pageProps }) {
         />
       </Head>
 
-      <GlobalStyle />
-
       <RecoilRoot>
+        <GlobalStyle />
         <Nav />
-
         <Component {...pageProps} />
         <Footer />
       </RecoilRoot>

@@ -4,11 +4,7 @@ import Nav from '../components/nav';
 import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import { userState } from '../context/recoilStates';
-
-const Title = styled.h1`
-  font-size: 50px;
-  color: black;
-`;
+import Homepage from '../components/home';
 
 export default function Home({ user }) {
   const [, setUser] = useRecoilState(userState);
@@ -25,9 +21,7 @@ export default function Home({ user }) {
 
   return (
     <>
-      <Title>Homee</Title>
-      <h1>CORSS v2</h1>
-      {user && <h5>{user.email}</h5>}
+      <Homepage user={user} />
     </>
   );
 }

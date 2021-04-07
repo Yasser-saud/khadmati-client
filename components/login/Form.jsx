@@ -8,29 +8,32 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import React from 'react';
-
+import tw from 'twin.macro';
+import ErrAlert from '../general/ErrAlert';
+import Spinner from '../svg/spinner.svg';
 /////
 const Form = () => {
   const router = useRouter();
   const { register, errors, handleSubmit } = useForm();
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const onSubmit = async ({ email, password }) => {
+    setLoading(true);
     try {
       const res = await axios.post(
         '/api/user/login',
         { email, password },
         { withCredentials: true }
       );
-      console.log(res);
+
       router.push('/');
     } catch (error) {
-      console.log(error);
+      setLoading(false);
       if (error.response) {
         const msg = await error.response.data.msg;
         setError(msg);
       } else if (error.request) {
-        console.log(error.request);
       } else {
         console.log('ERORR in login', error);
       }
@@ -39,7 +42,7 @@ const Form = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      {error}
+      {error && <ErrAlert error={error} />}
       <InputWrapper>
         <IconBox icon={<EmailIcon />} />
         <input
@@ -62,7 +65,9 @@ const Form = () => {
       <ForgetPass>
         <Link href="/">نسيت كلمة المرور؟</Link>
       </ForgetPass>
-      <Submit>تسجيل الدخول</Submit>
+      <Submit loading={loading} disabled={loading ? true : false}>
+        {loading ? <Spinner /> : 'تسجيل الدخول'}
+      </Submit>
       <Register>
         اضعط <Link href="/register">هنا</Link> اذا لايوجد لديك حساب
       </Register>
@@ -84,6 +89,7 @@ const InputWrapper = styled.div`
     text-align: right;
     font-family: inherit;
     transition: 0.2s ease-in;
+    padding: 0 10px;
   }
 `;
 
@@ -100,7 +106,7 @@ const ForgetPass = styled.p`
 const Submit = styled.button`
   width: 100%;
   height: 43px;
-  background: #5c73f2;
+
   filter: drop-shadow(1px 1px 3px rgba(0, 0, 0, 0.15));
   border-radius: 50px;
   outline: none;
@@ -110,19 +116,35 @@ const Submit = styled.button`
   font-family: inherit;
   transition: 0.1s;
   margin-top: 20px;
-  cursor: pointer;
+  background: ${({ loading }) => (loading ? '#93a0e9' : '#5c73f2')};
+  cursor: ${({ loading }) => (loading ? 'not-allowed' : 'pointer')};
+  display: flex;
+  align-items: center;
+  justify-content: center;
   &:hover {
     background: #7a8cf5;
+  }
+  &:focus {
+    outline: 0;
+  }
+  ${tw`focus:ring-4`}
+  svg {
+    width: 40px;
+    height: 40px;
+    color: red;
+    margin: 0;
   }
 `;
 
 const Register = styled.p`
-  font-size: 0.75rem;
+  font-size: 0.85rem;
   line-height: 16px;
   text-align: right;
+  padding-top: 10px;
   a {
     color: blue;
     font-weight: 600;
   }
 `;
+
 export default Form;

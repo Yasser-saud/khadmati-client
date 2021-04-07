@@ -8,6 +8,7 @@ const profile = () => {
     </>
   );
 };
+
 export const getServerSideProps = profileProtect();
 // export const getServerSideProps = async (ctx) => {
 //   const headers = ctx.req?.headers;

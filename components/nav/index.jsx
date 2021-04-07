@@ -6,7 +6,7 @@ import { useInView } from 'react-intersection-observer';
 import { useRecoilState } from 'recoil';
 import { userState } from '../../context/recoilStates';
 import { useRouter } from 'next/router';
-
+import tw from 'twin.macro';
 const index = () => {
   const [nav, setNav] = useState(false);
 
@@ -26,7 +26,7 @@ const index = () => {
   if (typeof window !== 'undefined') {
     const checkWindow = () => {
       const ws = window.scrollY;
-      if (ws > 50) {
+      if (ws > 20) {
         setNav(true);
       } else {
         setNav(false);
@@ -35,53 +35,56 @@ const index = () => {
     window.addEventListener('scroll', checkWindow);
   }
 
-  // if (loading) {
-  //   return <></>;
-  // }
-
   return (
-    <Nav ref={ref} ws={nav} className="container mx-auto sticky top-0 z-40">
-      {loading ? (
-        <LeftWrapper />
-      ) : (
-        <LeftWrapper ws={nav}>
-          {user ? (
-            <NavProfilePic user={user} />
-          ) : (
-            <>
-              <Link href="/register">
-                <a>تسجيل</a>
-              </Link>
-              <hr />
-              <Link href="/login">
-                <a>دخول</a>
-              </Link>
-            </>
-          )}
-        </LeftWrapper>
-      )}
-      <RightWrapper ws={nav}>
-        <Logo>
-          <Link href="/">
-            <a>خدماتي</a>
-          </Link>
-        </Logo>
-      </RightWrapper>
-    </Nav>
+    <Wrapper ref={ref} ws={nav} className="sticky top-0 z-40">
+      <Nav ref={ref} ws={nav} className="container mx-auto">
+        {loading ? (
+          <LeftWrapper />
+        ) : (
+          <LeftWrapper ws={nav}>
+            {user ? (
+              <NavProfilePic user={user} />
+            ) : (
+              <>
+                <Link href="/register">
+                  <a>تسجيل</a>
+                </Link>
+                <hr />
+                <Link href="/login">
+                  <a>دخول</a>
+                </Link>
+              </>
+            )}
+          </LeftWrapper>
+        )}
+        <RightWrapper ws={nav}>
+          <Logo>
+            <Link href="/">
+              <a>خدماتي</a>
+            </Link>
+          </Logo>
+        </RightWrapper>
+      </Nav>
+    </Wrapper>
   );
 };
 
-const Nav = styled.div`
-  height: 80px;
+const Wrapper = styled.div`
+  height: 70px;
   width: 100%;
-  background: ${(props) => (props.ws ? '#747474' : 'transparent')};
-  display: flex;
-  align-items: center;
-  border-bottom: ${(props) => (props.ws ? '1px solid #A5A5A5' : 'none')};
+  background: ${(props) => (props.ws ? '#eeeeee' : 'transparent')};
+  /* border-bottom: ${(props) => (props.ws ? '1px solid #909090' : 'none')}; */
   transition: 0.2s ease-in-out;
   a {
-    color: ${(props) => (props.ws ? 'white' : 'black')};
+    color: ${(props) => (props.ws ? 'black' : '')};
   }
+  ${(props) => props.ws && tw`shadow-md`}
+`;
+const Nav = styled.div`
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
 `;
 const LeftWrapper = styled.div`
   display: flex;
@@ -105,7 +108,7 @@ const RightWrapper = styled.div`
 `;
 
 const Logo = styled.div`
-  font-size: 36px;
+  font-size: 26px;
 `;
 
 export default index;

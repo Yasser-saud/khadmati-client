@@ -16,7 +16,6 @@ export function withAuthServerSideProps() {
         return { redirect: { permanent: false, destination: '/' } };
       }
     } catch (error) {
-      console.log(error.response?.status);
       return { props: {} };
     }
   };
