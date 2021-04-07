@@ -11,6 +11,7 @@ import React from 'react';
 import tw from 'twin.macro';
 import ErrAlert from '../general/ErrAlert';
 import Spinner from '../svg/Spinner.svg';
+
 /////
 const Form = () => {
   const router = useRouter();
@@ -85,7 +86,8 @@ const InputWrapper = styled.div`
     border: none;
     margin-bottom: 12px;
     font-size: 0.9rem;
-    filter: drop-shadow(1px 1px 3px rgba(0, 0, 0, 0.15));
+    /* filter: drop-shadow(1px 1px 3px rgba(0, 0, 0, 0.15)); */
+    ${tw`shadow`}
     text-align: right;
     font-family: inherit;
     transition: 0.2s ease-in;
