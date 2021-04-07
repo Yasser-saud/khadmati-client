@@ -70,10 +70,10 @@ const index = () => {
 };
 
 const Wrapper = styled.div`
+  padding: 0 20px;
   height: 70px;
   width: 100%;
   background: ${(props) => (props.ws ? '#eeeeee' : 'transparent')};
-  /* border-bottom: ${(props) => (props.ws ? '1px solid #909090' : 'none')}; */
   transition: 0.2s ease-in-out;
   a {
     color: ${(props) => (props.ws ? 'black' : '')};

@@ -11,13 +11,14 @@ import React from 'react';
 import tw from 'twin.macro';
 import ErrAlert from '../general/ErrAlert';
 import Spinner from '../svg/Spinner.svg';
-
+// import ErrMsg from '../general/ErrMsg';
+import FormInput from '../general/FormInput';
 /////
 const Form = () => {
   const router = useRouter();
   const { register, errors, handleSubmit } = useForm();
   const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState();
 
   const onSubmit = async ({ email, password }) => {
     setLoading(true);
@@ -44,31 +45,43 @@ const Form = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       {error && <ErrAlert error={error} />}
+
       <InputWrapper>
         <IconBox icon={<EmailIcon />} />
-        <input
+        <FormInput
+          err={errors.email}
           type="email"
           name="email"
           placeholder="البريد الإلكتروني"
-          ref={register}
+          register={register({
+            required: 'الرجاء تعبأة الخانة',
+            type: 'email',
+          })}
         />
       </InputWrapper>
 
       <InputWrapper>
         <IconBox icon={<KeyIcon />} />
-        <input
+        <FormInput
+          err={errors.password}
           name="password"
           type="password"
           placeholder="كلمة المرور"
-          ref={register}
+          register={register({
+            required: 'الرجاء تعبأة الخانة',
+            minLength: { value: 3 },
+          })}
         />
       </InputWrapper>
+
       <ForgetPass>
         <Link href="/">نسيت كلمة المرور؟</Link>
       </ForgetPass>
+
       <Submit loading={loading} disabled={loading ? true : false}>
         {loading ? <Spinner /> : 'تسجيل الدخول'}
       </Submit>
+
       <Register>
         اضعط <Link href="/register">هنا</Link> اذا لايوجد لديك حساب
       </Register>
@@ -78,24 +91,6 @@ const Form = () => {
 
 const InputWrapper = styled.div`
   display: flex;
-  input {
-    width: 312px;
-    height: 39px;
-    border-radius: 0px 4px 4px 0px;
-    outline: none;
-    border: none;
-    margin-bottom: 12px;
-    font-size: 0.9rem;
-
-    text-align: right;
-    font-family: inherit;
-    transition: 0.2s ease-in;
-    padding: 0 10px;
-    -webkit-box-shadow: 1px 1px 3px -2px rgba(0, 0, 0, 0.75);
-    -moz-box-shadow: 1px 1px 3px -2px rgba(0, 0, 0, 0.75);
-    box-shadow: 1px 1px 3px -2px rgba(0, 0, 0, 0.75);
-    -webkit-appearance: none;
-  }
 `;
 
 const ForgetPass = styled.p`
@@ -111,12 +106,9 @@ const ForgetPass = styled.p`
 const Submit = styled.button`
   width: 100%;
   height: 43px;
-
   filter: drop-shadow(1px 1px 3px rgba(0, 0, 0, 0.15));
   border-radius: 50px;
-  outline: none;
-  border: none;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   color: white;
   font-family: inherit;
   transition: 0.1s;
@@ -129,10 +121,8 @@ const Submit = styled.button`
   &:hover {
     background: #7a8cf5;
   }
-  &:focus {
-    outline: 0;
-  }
-  ${tw`focus:ring-4`}
+
+  ${tw`focus:outline-none focus:ring-4`}
   svg {
     width: 40px;
     height: 40px;
