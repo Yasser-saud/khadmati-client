@@ -94,6 +94,7 @@ const InputWrapper = styled.div`
     font-family: inherit;
     transition: 0.2s ease-in;
     padding: 0 10px;
+    -webkit-appearance: none;
   }
 `;
 

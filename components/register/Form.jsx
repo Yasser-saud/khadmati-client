@@ -131,6 +131,7 @@ const Input = styled.input`
   &:focus {
     outline: ${({ err }) => (err ? '0.01px solid red' : '0.01px solid blue')};
   }
+  -webkit-appearance: none;
 `;
 const Disclaimer = styled.p`
   font-size: 0.65rem;
