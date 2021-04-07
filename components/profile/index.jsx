@@ -90,10 +90,7 @@ const EditBtn = styled.button`
   &:hover {
     filter: brightness(0.9);
   }
-  &:focus {
-    outline: 0;
-  }
-  ${tw`focus:ring-4`}
+  ${tw`focus:outline-none focus:ring-4`}
   @media (max-width: 768px) {
     font-size: 1.3rem;
     width: 160px;
