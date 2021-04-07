@@ -42,8 +42,8 @@ const PersonalInfo = ({ register, errors, profile }) => {
 const Container = styled.div`
   flex: 35%;
   order: 1;
-  width: 374px;
-  max-height: 387px;
+  min-width: 324px;
+  min-height: 387px;
   border: 0.5px solid #afafaf;
   box-sizing: border-box;
   border-radius: 14px;

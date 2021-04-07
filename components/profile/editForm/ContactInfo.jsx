@@ -43,8 +43,8 @@ const ContactInfo = ({ register, errors, profile }) => {
 const Container = styled.div`
   flex: 35%;
   order: 3;
-  width: 374px;
-  height: 357px;
+  min-width: 324px;
+  min-height: 357px;
   border: 0.5px solid #afafaf;
   box-sizing: border-box;
   border-radius: 14px;

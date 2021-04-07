@@ -67,7 +67,7 @@ const Container = styled.div`
 `;
 
 const Form = styled.form`
-  width: 100%;
+  width: 80%;
   height: 100%;
   display: flex;
   flex-direction: row-reverse;
