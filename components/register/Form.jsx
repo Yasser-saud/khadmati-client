@@ -121,9 +121,11 @@ const Input = styled.input`
   border: none;
   margin-bottom: 12px;
   font-size: 0.9rem;
-  /* filter: drop-shadow(1px 1px 3px rgba(0, 0, 0, 0.15)); */
-  /* box-shadow: 1px 0.5px 4px -3px rgb(1, 1, 1); */
-  -webkit-filter: drop-shadow(1px 1px 3px rgba(0, 0, 0, 0.15));
+
+  -webkit-box-shadow: 1px 1px 3px -2px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 1px 1px 3px -2px rgba(0, 0, 0, 0.75);
+  box-shadow: 1px 1px 3px -2px rgba(0, 0, 0, 0.75);
+  -webkit-appearance: none;
 
   text-align: right;
   font-family: inherit;
