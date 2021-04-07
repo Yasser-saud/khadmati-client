@@ -47,7 +47,6 @@ const Form = () => {
       <InputWrapper>
         <IconBox icon={<EmailIcon />} />
         <input
-          autoComplete={false}
           type="email"
           name="email"
           placeholder="البريد الإلكتروني"
@@ -89,12 +88,13 @@ const InputWrapper = styled.div`
     font-size: 0.9rem;
     /* filter: drop-shadow(1px 1px 3px rgba(0, 0, 0, 0.15)); */
     /* box-shadow: 3px 4px 5px 0px rgba(1, 1, 1, 0.0015); */
-    box-shadow: 1px 0.5px 4px -3px rgb(1, 1, 1);
+    /* box-shadow: 1px 0.5px 4px -3px rgb(1, 1, 1); */
     text-align: right;
     font-family: inherit;
     transition: 0.2s ease-in;
     padding: 0 10px;
     -webkit-appearance: none;
+    -webkit-filter: drop-shadow(1px 1px 3px rgba(0, 0, 0, 0.15));
   }
 `;
 
