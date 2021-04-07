@@ -21,7 +21,7 @@ const Card = ({ profile }) => {
         <p>المدينة: {profile.city}</p>
         <p>المنطقة: {profile.district}</p>
       </InputFields>
-
+      <hr />
       <Contact>تواصل معي</Contact>
 
       <IconsWrapper>
@@ -60,7 +60,7 @@ const Card = ({ profile }) => {
 
 const CardContainer = styled.div`
   width: 407px;
-  min-height: 586px;
+  min-height: 600px;
   background: #fff;
   border-radius: 50px;
   filter: drop-shadow(1px 2px 3px rgba(102, 102, 102, 0.15));
@@ -71,10 +71,12 @@ const CardContainer = styled.div`
 
   hr {
     width: 90%;
+    margin: 15px 0;
   }
 
-  @media screen and (max-width: 700px) {
-    width: 350px;
+  @media screen and (max-width: 768px) {
+    width: 330px;
+    min-height: 550px;
   }
 `;
 
@@ -89,9 +91,17 @@ const Picture = styled.div`
   align-items: center;
   overflow: hidden;
   margin-bottom: 30px;
+
+  @media screen and (max-width: 768px) {
+    width: 141px;
+    height: 141px;
+  }
 `;
 const ProfPicWrapper = styled.div`
   width: 100px;
+  @media (max-width: 768px) {
+    width: 70px;
+  }
 `;
 
 const UserNameContainer = styled.div`
@@ -99,12 +109,18 @@ const UserNameContainer = styled.div`
   height: 47px;
   text-align: center;
   font-size: 1.7rem;
+  @media (max-width: 768px) {
+    font-size: 1.4rem;
+  }
 `;
 const InputFields = styled.div`
   width: 100%;
   text-align: right;
   padding: 22px;
   font-size: 1.2rem;
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
 `;
 
 const Contact = styled.div`
@@ -112,7 +128,10 @@ const Contact = styled.div`
   height: 30px;
   text-align: center;
   font-size: 1.3rem;
-  margin-bottom: 20px;
+  margin: 20px 0;
+  @media (max-width: 768px) {
+    font-size: 1.1rem;
+  }
 `;
 
 const IconsWrapper = styled.div`

@@ -55,6 +55,13 @@ const ProfileTag = styled.h1`
   font-size: 48px;
   text-align: right;
   margin-bottom: 31px;
+  padding: 0 20px;
+  @media (max-width: 768px) {
+    font-size: 32px;
+  }
+  @media (max-width: 400px) {
+    font-size: 26px;
+  }
 `;
 
 const CardWrapper = styled.div`
@@ -87,6 +94,11 @@ const EditBtn = styled.button`
     outline: 0;
   }
   ${tw`focus:ring-4`}
+  @media (max-width: 768px) {
+    font-size: 1.3rem;
+    width: 160px;
+    height: 46px;
+  }
 `;
 const shimmer = keyframes`
 100% {
@@ -117,6 +129,10 @@ const Loading = styled.div`
     );
     animation: ${shimmer} 1s infinite;
     content: '';
+  }
+  @media screen and (max-width: 768px) {
+    width: 330px;
+    min-height: 550px;
   }
 `;
 

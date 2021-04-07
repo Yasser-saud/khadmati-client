@@ -59,6 +59,7 @@ const index = ({ setEdit, profile }) => {
   );
 };
 const Container = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -72,6 +73,9 @@ const Form = styled.form`
   flex-direction: row-reverse;
   flex-wrap: wrap;
   justify-content: center;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 const Button = styled.button`
   order: 5;
@@ -84,12 +88,14 @@ const Button = styled.button`
   color: #ffffff;
   font-size: 1.6rem;
   transition: 0.1s ease-out;
-  &:focus {
-    outline: none;
-  }
   &:hover {
     filter: brightness(0.9);
   }
-  ${tw`focus:ring-4`}
+  ${tw`focus:outline-none focus:ring-4`}
+  @media (max-width: 768px) {
+    font-size: 1.3rem;
+    width: 160px;
+    height: 46px;
+  }
 `;
 export default index;
