@@ -4,13 +4,13 @@ import IconBox from './IconBox';
 import EmailIcon from '../svg/envelope.svg';
 import KeyIcon from '../svg/key.svg';
 import Link from 'next/link';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import tw from 'twin.macro';
 import ErrAlert from '../general/ErrAlert';
 
-import Spinner from '../svg/spinner.svg';
+import Spinner from '../svg/Spinner.svg';
 const Form = () => {
   const router = useRouter();
   const { register, errors, handleSubmit, watch } = useForm();

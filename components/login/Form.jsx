@@ -10,7 +10,7 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import tw from 'twin.macro';
 import ErrAlert from '../general/ErrAlert';
-import Spinner from '../svg/spinner.svg';
+import Spinner from '../svg/Spinner.svg';
 /////
 const Form = () => {
   const router = useRouter();
