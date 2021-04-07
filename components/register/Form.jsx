@@ -121,7 +121,8 @@ const Input = styled.input`
   border: none;
   margin-bottom: 12px;
   font-size: 0.9rem;
-  filter: drop-shadow(1px 1px 3px rgba(0, 0, 0, 0.15));
+  /* filter: drop-shadow(1px 1px 3px rgba(0, 0, 0, 0.15)); */
+  box-shadow: 1px 0.5px 4px -3px rgb(1, 1, 1);
   text-align: right;
   font-family: inherit;
   background: ${({ err }) => err && '#ffe4e4'};
