@@ -76,8 +76,9 @@ const Container = styled.div`
   order: 2;
   padding: 10px 20px;
   min-width: 324px;
-  min-height: 464px;
-  border: 0.5px solid #afafaf;
+  min-height: 400px;
+  background: #fff;
+  filter: drop-shadow(1px 1px 3px rgba(0, 0, 0, 0.15));
   box-sizing: border-box;
   border-radius: 14px;
   display: flex;
@@ -88,6 +89,7 @@ const Tag = styled.div`
   text-align: center;
   font-size: 24px;
   margin-bottom: 10px;
+  padding: 10px 0;
 `;
 const Wrapper = styled.div`
   display: flex;

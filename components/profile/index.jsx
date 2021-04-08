@@ -73,7 +73,7 @@ const CardWrapper = styled.div`
 `;
 
 const EditBtn = styled.button`
-  margin-top: 50px;
+  margin: ${({ edit }) => (edit ? '20px 0 30px 0' : '100px 0')};
   width: 200px;
   height: 66px;
   background: ${(props) => (props.edit ? '#EB5353' : '#5C73F2')};
@@ -87,6 +87,7 @@ const EditBtn = styled.button`
   cursor: pointer;
   transition: 0.1s ease-out;
   border: none;
+
   &:hover {
     filter: brightness(0.9);
   }

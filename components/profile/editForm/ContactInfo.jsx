@@ -44,8 +44,9 @@ const Container = styled.div`
   flex: 35%;
   order: 3;
   min-width: 324px;
-  min-height: 357px;
-  border: 0.5px solid #afafaf;
+  min-height: 400px;
+  background: #fff;
+  filter: drop-shadow(1px 1px 3px rgba(0, 0, 0, 0.15));
   box-sizing: border-box;
   border-radius: 14px;
   display: flex;
@@ -54,11 +55,12 @@ const Container = styled.div`
   margin: 20px;
 
   label {
-    margin-bottom: 10px;
+    margin-top: 10px;
     text-align: right;
+    padding: 10px 0 0 0;
   }
   input {
-    margin-bottom: 20px;
+    margin: 10px 0;
     border: none;
     outline: none;
     text-align: right;
@@ -77,5 +79,6 @@ const Tag = styled.p`
   text-align: center;
   font-size: 24px;
   margin-bottom: 10px;
+  padding: 10px 0 0 0;
 `;
 export default ContactInfo;

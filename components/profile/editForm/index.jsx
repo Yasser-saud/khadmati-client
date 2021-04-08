@@ -73,19 +73,17 @@ const Form = styled.form`
   flex-direction: row-reverse;
   flex-wrap: wrap;
   justify-content: center;
-  @media (max-width: 768px) {
-    width: 100%;
-  }
 `;
 const Button = styled.button`
+  margin: 30px 0 0 0;
   order: 5;
   width: 200px;
   height: 66px;
-  background: #20c997;
+  background: #34d399;
   border: none;
   box-shadow: 0px 4px 16px rgba(102, 102, 102, 0.15);
   border-radius: 50px;
-  color: #ffffff;
+  color: #000;
   font-size: 1.6rem;
   transition: 0.1s ease-out;
   &:hover {
