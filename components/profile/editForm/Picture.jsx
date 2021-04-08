@@ -50,8 +50,8 @@ const Picture = ({ register }) => {
 const Container = styled.div`
   flex: 35%;
   order: 4;
-  width: 255px;
-  height: 400px;
+  min-width: 324px;
+  min-height: 400px;
   background: #eceef2;
   background: #fff;
   filter: drop-shadow(1px 1px 3px rgba(0, 0, 0, 0.15));
