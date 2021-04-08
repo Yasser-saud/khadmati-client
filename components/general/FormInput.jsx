@@ -32,8 +32,12 @@ const Input = styled.input`
   background: ${({ err }) => err && '#ffe4e4'};
   padding: 0 10px;
   outline-offset: -1px;
+  /* transition: 0.1s; */
   &:focus {
-    outline: ${({ err }) => (err ? '0.01px solid red' : '0.01px solid blue')};
+    /* -webkit-box-shadow: 0px 0px 1px 10px rgba(96, 165, 250, 0.74);
+    -moz-box-shadow: 0px 0px 1px 10px rgba(96, 165, 250, 0.74); */
+    box-shadow: 0px 0px 1px 3px
+      ${({ err }) => (err ? 'rgba(248,113,113,1)' : 'rgba(96,165,250,0.74)')};
   }
   -webkit-appearance: none;
 `;
