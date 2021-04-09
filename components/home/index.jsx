@@ -92,8 +92,7 @@ const HeroButton = styled.button`
   font-size: 21px;
   /* font-weight: 600; */
   color: #dddddd;
-  padding: 0;
-  margin: 0;
+  line-height: 40px;
   :focus {
     outline: none;
     box-shadow: 0px 0px 1px 3px rgba(96, 165, 250, 0.74);
