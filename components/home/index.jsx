@@ -92,7 +92,7 @@ const HeroButton = styled.button`
   font-size: 21px;
   /* font-weight: 600; */
   color: #dddddd;
-  padding: 0;
+  margin: 0 auto;
   :focus {
     outline: none;
     box-shadow: 0px 0px 1px 3px rgba(96, 165, 250, 0.74);
@@ -101,6 +101,7 @@ const HeroButton = styled.button`
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 0 auto;
   }
 `;
 export default index;
