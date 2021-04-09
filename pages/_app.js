@@ -57,6 +57,7 @@ export default function App({ Component, pageProps }) {
 
 const GlobalStyle = createGlobalStyle`
   body {
+    -webkit-appearance: none;
     background-color: #fdfdfd;
     margin: 0;
     padding: 0;

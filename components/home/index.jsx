@@ -11,7 +11,9 @@ const index = ({ user }) => {
           نوفر لك جميع الخدمات المتواجدة في منطقتك <span>في منصة واحدة</span>
         </Statement>
         <HeroSeach name="search" placeholder="مدرس خاص" />
-        <HeroButton>ابــحــث</HeroButton>
+        <HeroButton>
+          <span>ابــحــث</span>
+        </HeroButton>
       </ImageContainer>
       <h1>Homee</h1>
       {user && <h3>Hello {user.email}</h3>}
@@ -46,7 +48,7 @@ const ImageContainer = styled.div`
   align-items: center;
   position: relative;
   justify-content: center;
-  -webkit-appearance: none;
+
   img {
     min-width: 600px;
     transform: rotate(-90deg);
@@ -60,7 +62,6 @@ const ImageContainer = styled.div`
 `;
 
 const HeroSeach = styled.input`
-  -webkit-appearance: none;
   position: absolute;
   left: 4%;
   bottom: 22%;
@@ -78,7 +79,6 @@ const HeroSeach = styled.input`
 `;
 
 const HeroButton = styled.button`
-  -webkit-appearance: none;
   position: absolute;
   left: 12%;
   bottom: 8%;
@@ -95,6 +95,11 @@ const HeroButton = styled.button`
   :focus {
     outline: none;
     box-shadow: 0px 0px 1px 3px rgba(96, 165, 250, 0.74);
+  }
+  span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 `;
 export default index;
