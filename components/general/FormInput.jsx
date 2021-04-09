@@ -39,7 +39,6 @@ const Input = styled.input`
     box-shadow: 0px 0px 1px 3px
       ${({ err }) => (err ? 'rgba(248,113,113,1)' : 'rgba(96,165,250,0.74)')};
   }
-  -webkit-appearance: none;
 `;
 
 const Error = styled.p`

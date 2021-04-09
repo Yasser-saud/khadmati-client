@@ -40,18 +40,18 @@ const Statement = styled.p`
   }
 `;
 const ImageContainer = styled.div`
-  /* width: 100%; */
   overflow: hidden;
   height: 400px;
   display: flex;
   align-items: center;
   position: relative;
   justify-content: center;
-
+  -webkit-appearance: none;
   img {
     min-width: 600px;
     transform: rotate(-90deg);
     margin-left: 150px;
+    opacity: 0.4;
   }
 
   @media (min-width: 900px) {
@@ -60,10 +60,11 @@ const ImageContainer = styled.div`
 `;
 
 const HeroSeach = styled.input`
+  -webkit-appearance: none;
   position: absolute;
   left: 4%;
-  bottom: 30%;
-  height: 40px;
+  bottom: 22%;
+  height: 37px;
   text-align: right;
   width: 170px;
   padding: 0 10px;
@@ -77,19 +78,20 @@ const HeroSeach = styled.input`
 `;
 
 const HeroButton = styled.button`
+  -webkit-appearance: none;
   position: absolute;
-  left: 9%;
-  bottom: 12%;
-  background: #60a5fa;
+  left: 12%;
+  bottom: 8%;
+  background: #2563eb;
   border-radius: 32px;
-  width: 130px;
-  height: 45px;
+  width: 110px;
+  height: 40px;
   box-shadow: -6px -6px 10px rgba(255, 255, 255, 0.2),
     6px 6px 10px rgba(0, 0, 0, 0.1);
   text-align: center;
-  font-size: 18px;
-  font-weight: 600;
-  color: #3a3a3a;
+  font-size: 21px;
+  /* font-weight: 600; */
+  color: #dddddd;
   :focus {
     outline: none;
     box-shadow: 0px 0px 1px 3px rgba(96, 165, 250, 0.74);
