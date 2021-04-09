@@ -7,7 +7,7 @@ import { Router } from 'next/router';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 import { RecoilRoot } from 'recoil';
-import React from 'react';
+import React, { useEffect } from 'react';
 import 'tailwindcss/tailwind.css';
 
 // axios.defaults.baseURL = 'http://localhost:5000';
@@ -31,6 +31,9 @@ Router.events.on('routerChangeError', () => {
 });
 
 export default function App({ Component, pageProps }) {
+  useEffect(() => {
+    console.log('HELLO');
+  }, []);
   return (
     <>
       <Head>

@@ -36,7 +36,12 @@ const index = () => {
   }
 
   return (
-    <Wrapper ref={ref} ws={nav} className="sticky top-0 z-40">
+    <Wrapper
+      path={router.pathname}
+      ref={ref}
+      ws={nav}
+      className="sticky top-0 z-40"
+    >
       <Nav ref={ref} ws={nav} className="container mx-auto">
         {loading ? (
           <LeftWrapper />
@@ -71,6 +76,7 @@ const index = () => {
 
 const Wrapper = styled.div`
   padding: 0 20px;
+  margin-bottom: ${({ path }) => (path === '/' ? '-70px' : '0')};
   height: 70px;
   width: 100%;
   background: ${(props) => (props.ws ? '#eeeeee' : 'transparent')};
@@ -96,7 +102,7 @@ const LeftWrapper = styled.div`
   hr {
     height: 1px;
     width: 20px;
-    color: black;
+    background-color: black;
     margin: 13px 5px;
     transform: rotate(90deg);
   }

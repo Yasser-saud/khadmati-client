@@ -19,6 +19,7 @@ const NavProfileIcon = () => {
 
   return (
     <Ring>
+      <img src="/lucy.jpg" />
       <DropDown>
         <Li>
           <Link href="/profile">الملف الشخصي</Link>
@@ -33,15 +34,21 @@ const Ring = styled.div`
   width: 52px;
   height: 52px;
   background: #bdbdbd;
-  border: 2px solid #ffffff;
+  border: 2px solid #dfdfdf;
   box-sizing: border-box;
   box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.15);
   border-radius: 50%;
   position: relative;
+  overflow: hidden;
+
   &:hover ul {
     opacity: 1;
     pointer-events: all;
     transform: none;
+  }
+  @media (max-width: 768px) {
+    width: 42px;
+    height: 42px;
   }
 `;
 

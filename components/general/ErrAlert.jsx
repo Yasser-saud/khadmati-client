@@ -16,6 +16,7 @@ const ErrorWrapper = styled.div`
   align-items: center;
   padding: 10px;
   border-radius: 4px;
+  font-weight: 600;
 `;
 
 export default ErrAlert;
