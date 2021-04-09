@@ -8,7 +8,7 @@ const index = ({ user }) => {
       <ImageContainer>
         <img src="/hero.jpg" />
         <Statement>
-          نوفر لك جميع الخدمات المتواجدة في منطقتك <span>في منصة واحدة</span>
+          نوفر لك جميع الخدمات المتواجدة في منطقتك في منصة واحدة
         </Statement>
         <HeroSeach name="search" placeholder="مدرس خاص" />
         <HeroButton>
@@ -92,16 +92,11 @@ const HeroButton = styled.button`
   font-size: 21px;
   /* font-weight: 600; */
   color: #dddddd;
-  margin: 0 auto;
+  padding: 0;
+  margin: 0;
   :focus {
     outline: none;
     box-shadow: 0px 0px 1px 3px rgba(96, 165, 250, 0.74);
-  }
-  span {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto;
   }
 `;
 export default index;
