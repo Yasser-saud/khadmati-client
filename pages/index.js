@@ -1,6 +1,4 @@
-import styled from 'styled-components';
 import axios from 'axios';
-import Nav from '../components/nav';
 import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import { userState } from '../context/recoilStates';
@@ -10,12 +8,10 @@ export default function Home({ user }) {
   const [, setUser] = useRecoilState(userState);
 
   useEffect(() => {
-    if (user != null) {
+    if (user !== null) {
       setUser(user);
-      sessionStorage.setItem('khadmati-user', JSON.stringify(user));
     } else {
       setUser(null);
-      sessionStorage.removeItem('khadmati-user');
     }
   }, []);
 
@@ -32,7 +28,7 @@ export async function getServerSideProps(context) {
   try {
     const session = await axios({
       method: 'GET',
-      url: '/api/user/get-user',
+      url: '/api/user/current-user',
       headers,
     });
     return {

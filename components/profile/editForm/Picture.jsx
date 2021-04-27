@@ -1,10 +1,10 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Pic from '../../svg/user-solid.svg';
 
-const Picture = ({ register }) => {
+const Picture = ({ register, selectedFile, setSelecetedFile }) => {
   const [preview, setPreview] = useState();
-  const [selectedFile, setSelecetedFile] = useState();
 
   useEffect(() => {
     if (!selectedFile) {
@@ -18,7 +18,7 @@ const Picture = ({ register }) => {
     };
   }, [selectedFile]);
 
-  const onSelectFile = (e) => {
+  const onSelectFile = async (e) => {
     if (!e.target.files || e.target.files.length === 0) {
       setSelecetedFile(undefined);
       return;

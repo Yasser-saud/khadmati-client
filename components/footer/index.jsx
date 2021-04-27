@@ -34,6 +34,10 @@ const FooterContainer = styled.footer`
   background: #262626;
   position: absolute;
   bottom: 0;
+
+  @media (max-width: 700px) {
+    padding: 0 5px;
+  }
 `;
 const ContentWrapper = styled.div`
   height: 100%;
@@ -87,7 +91,7 @@ const PolicyBox = styled.div`
     font-size: 13px;
     text-decoration: underline;
     text-underline-position: under;
-
+    padding: 3px 0;
     @media screen and (max-width: 700px) {
       font-size: 10px;
     }

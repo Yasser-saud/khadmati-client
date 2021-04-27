@@ -1,6 +1,5 @@
 import { ServerStyleSheet } from 'styled-components';
 import Document, { Html, Head, Main, NextScript } from 'next/document';
-import nav from '../components/nav';
 
 export default class MyDocument extends Document {
   static async getInitialProps(ctx) {
@@ -19,8 +18,10 @@ export default class MyDocument extends Document {
         ...initialProps,
         styles: (
           <>
-            {initialProps.styles}
-            {sheet.getStyleElement()}
+            <body onTouchStart>
+              {initialProps.styles}
+              {sheet.getStyleElement()}
+            </body>
           </>
         ),
       };

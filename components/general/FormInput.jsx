@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 const FormInput = ({ err, register, ...inputProps }) => {
@@ -9,12 +9,15 @@ const FormInput = ({ err, register, ...inputProps }) => {
     </Container>
   );
 };
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
 `;
+
 const Input = styled.input`
-  width: 312px;
+  width: 100%;
   height: 39px;
   border-radius: 0px 4px 4px 0px;
   outline: ${({ err }) => (err ? '0.01px solid red' : 'none')};

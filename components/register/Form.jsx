@@ -28,15 +28,16 @@ const Form = () => {
       router.push('/');
     } catch (error) {
       if (error.response) {
-        const msg = error.response.data.msg;
+        const msg = error.response.data.message;
         setError(msg);
-        setLoading(false);
+        return setLoading(false);
       }
+      return router.push('/500');
     }
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <FormContainer onSubmit={handleSubmit(onSubmit)}>
       {error && <ErrAlert error={error} />}
       <InputWrapper>
         <IconBox icon={<EmailIcon />} />
@@ -93,7 +94,7 @@ const Form = () => {
         </Link>{' '}
         الخاصة بنا
       </Disclaimer>
-      <Submit loading={loading} disabled={loading ? true : false}>
+      <Submit loading={loading} disabled={loading ? 'true' : false}>
         {loading ? <Spinner /> : 'تسجيل'}
       </Submit>
       <Login>
@@ -103,12 +104,17 @@ const Form = () => {
         </Link>{' '}
         لتسجيل الدخول
       </Login>
-    </form>
+    </FormContainer>
   );
 };
 
+const FormContainer = styled.form`
+  width: 355px;
+`;
+
 const InputWrapper = styled.div`
   display: flex;
+  width: 100%;
 `;
 
 const Disclaimer = styled.p`

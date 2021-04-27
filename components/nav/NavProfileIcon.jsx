@@ -4,9 +4,12 @@ import styled from 'styled-components';
 import axios from 'axios';
 import { useRecoilState } from 'recoil';
 import { userState } from '../../context/recoilStates';
+import Arrow from '../svg/left-arrow.svg';
+import PlaceholderPic from '../svg/user.svg';
 
 const NavProfileIcon = () => {
   const [, setUser] = useRecoilState(userState);
+
   const logoutUser = async () => {
     try {
       const res = await axios.get('/api/user/logout');
@@ -19,12 +22,18 @@ const NavProfileIcon = () => {
 
   return (
     <Ring>
-      <img src="/lucy.jpg" />
+      <Image>
+        <img src="/lucy.jpg" />
+      </Image>
       <DropDown>
         <Li>
+          <PlaceholderPic />
           <Link href="/profile">الملف الشخصي</Link>
         </Li>
-        <Li onClick={logoutUser}>خروج</Li>
+        <Li onClick={logoutUser}>
+          <Arrow />
+          خروج
+        </Li>
       </DropDown>
     </Ring>
   );
@@ -39,8 +48,6 @@ const Ring = styled.div`
   box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.15);
   border-radius: 50%;
   position: relative;
-  overflow: hidden;
-
   &:hover ul {
     opacity: 1;
     pointer-events: all;
@@ -52,8 +59,15 @@ const Ring = styled.div`
   }
 `;
 
+const Image = styled.div`
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+`;
+
 const DropDown = styled.ul`
-  background: white;
+  background-color: #2a2a2a;
   width: auto;
   height: auto;
   opacity: 0;
@@ -74,17 +88,30 @@ const DropDown = styled.ul`
 `;
 
 const Li = styled.li`
-  font-size: 20px;
+  background-color: #525252;
+  font-size: 1rem;
   height: 50px;
   width: 200px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   cursor: pointer;
-  /* transition: 0.1s; */
+  padding: 0 15px;
+  margin: 5px 0;
+  color: #fff;
+  a {
+    color: #fff;
+  }
 
   &:hover {
     background: gray;
+  }
+
+  svg {
+    width: 20px;
+    height: 20px;
+    color: #fff;
+    fill: #fff;
   }
 `;
 

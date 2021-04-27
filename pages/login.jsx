@@ -1,5 +1,5 @@
 import Login from '../components/login';
-import { withAuthServerSideProps } from '../components/serverSideAuth';
+import { withAuthServerSideProps } from '../components/pageProtect';
 
 const login = () => {
   return <Login />;

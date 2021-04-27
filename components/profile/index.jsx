@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import styled, { keyframes } from 'styled-components';
-import Card from './Card';
+import Card from '../general/Card';
 import EditForm from './editForm';
 import axios from 'axios';
 import useSWR from 'swr';
 import tw from 'twin.macro';
+import Link from 'next/link';
 
 const fetchProfile = async (url) => {
   const res = await axios.get(url);
@@ -14,10 +15,16 @@ const fetchProfile = async (url) => {
 const profile = () => {
   const [edit, setEdit] = useState(false);
 
-  const { data, error } = useSWR('/api/profile/user-profile', fetchProfile);
+  const { data, error } = useSWR('/api/profile/', fetchProfile);
 
   if (error) {
-    return <h1>ERROR</h1>;
+    return (
+      <>
+        <h1>حصل خطأ</h1>
+        <br />
+        <Link href="/">الى الصفحة الرئسية</Link>
+      </>
+    );
   }
   if (!data) {
     return (
@@ -30,17 +37,15 @@ const profile = () => {
       </div>
     );
   }
-
-  const profile = data.profile;
   return (
     <div className="container mx-auto">
       <ProfileTag>الملف الشخصي</ProfileTag>
       <hr />
       <CardWrapper>
         {edit ? (
-          <EditForm profile={profile} setEdit={setEdit} />
+          <EditForm profile={data} setEdit={setEdit} />
         ) : (
-          <Card profile={profile} />
+          <Card profile={data} />
         )}
 
         <EditBtn edit={edit} onClick={() => setEdit(!edit)}>

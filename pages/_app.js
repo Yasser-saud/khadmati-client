@@ -7,7 +7,7 @@ import { Router } from 'next/router';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 import { RecoilRoot } from 'recoil';
-import React, { useEffect } from 'react';
+import React from 'react';
 import 'tailwindcss/tailwind.css';
 
 axios.defaults.baseURL = 'http://localhost:5000';
@@ -31,12 +31,9 @@ Router.events.on('routerChangeError', () => {
 });
 
 export default function App({ Component, pageProps }) {
-  useEffect(() => {
-    console.log('HELLO');
-  }, []);
   return (
     <>
-      <Head>
+      <Head ontouchstart="">
         <link
           rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Tajawal"
@@ -66,6 +63,7 @@ const GlobalStyle = createGlobalStyle`
     position: relative;
     min-height: 100vh;
     padding-bottom: 100px;
+    
   }
   a{
     text-decoration: none;
@@ -74,5 +72,7 @@ const GlobalStyle = createGlobalStyle`
   p{
     margin: 0;
   }
-  
+  *{
+    /* -webkit-appearance: none; */
+  }
 `;

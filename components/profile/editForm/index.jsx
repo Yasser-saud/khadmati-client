@@ -16,25 +16,43 @@ import tw from 'twin.macro';
 const index = ({ setEdit, profile }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const router = useRouter();
+  const [selectedFile, setSelecetedFile] = useState();
+
   const { register, handleSubmit, errors } = useForm({
     resolver: yupResolver(schema),
   });
 
   const onSubmit = async (data) => {
     const finalValues = mapValues(data, (v) => (v === '' ? null : v));
-    setLoading(true);
 
+    setLoading(true);
     try {
-      const res = await axios.patch('/api/profile/update-profile', finalValues);
+      if (selectedFile) {
+        const formData = new FormData();
+        formData.append('file', selectedFile);
+        formData.append('upload_preset', 'zngcwozp');
+        const uploadPic = await axios.post(
+          'https://api.cloudinary.com/v1_1/yasser-cloud/image/upload',
+          formData,
+
+          {
+            withCredentials: false,
+            onUploadProgress: (e) => {
+              let prog = Math.floor((e.loaded * 100) / e.total);
+              console.log(prog);
+            },
+          }
+        );
+        finalValues['picture'] = uploadPic.data.url;
+      }
+      const res = await axios.patch('/api/profile/', finalValues);
       setLoading(false);
-      mutate('/api/profile/user-profile');
+      mutate('/api/profile/');
       setEdit(false);
       console.log(res.data.message);
     } catch (error) {
       setLoading(false);
       setError(error.response.data.errors);
-      console.log(error.response.data.errors);
     }
   };
 
@@ -44,15 +62,15 @@ const index = ({ setEdit, profile }) => {
         <PersonalInfo profile={profile} register={register} errors={errors} />
         <ContactInfo profile={profile} register={register} errors={errors} />
         <ServicesInfo profile={profile} register={register} errors={errors} />
-        <Picture register={register} errors={errors} />
+        <Picture
+          selectedFile={selectedFile}
+          setSelecetedFile={setSelecetedFile}
+          register={register}
+          errors={errors}
+        />
       </Form>
 
-      <Button
-        css={[loading && tw`animate-spin`]}
-        disabled={loading ? true : ''}
-        form="form"
-        type="submit"
-      >
+      <Button disabled={loading ? true : ''} form="form" type="submit">
         {loading ? 'دقيقه....' : 'حفظ البيانات'}
       </Button>
     </Container>

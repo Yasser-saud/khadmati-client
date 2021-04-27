@@ -1,25 +1,46 @@
 import styled from 'styled-components';
 import ProfPic from '../svg/user-solid.svg';
-import Icons from './Icons';
+import Icons from '../profile/Icons';
 import React from 'react';
 import TwitterIcon from '../svg/twitter.svg';
 import WhatsApp from '../svg/WhatsApp.svg';
 import Instagram from '../svg/instagram.svg';
+
 const Card = ({ profile }) => {
+  const colors = ['#FECACA', '#A7F3D0', '#BFDBFE', '#C7D2FE', '#DDD6FE'];
+  const random = () => colors[Math.floor(Math.random() * colors.length)];
+
   return (
     <CardContainer>
       <Picture>
         <ProfPicWrapper>
-          <ProfPic />
+          {profile.picture ? <img src={profile.picture} /> : <ProfPic />}
         </ProfPicWrapper>
       </Picture>
 
-      <UserNameContainer>{profile.fullName}</UserNameContainer>
+      <UserNameContainer>
+        <strong>{profile.fullName}</strong>
+      </UserNameContainer>
 
       <hr />
       <InputFields>
-        <p>المدينة: {profile.city}</p>
-        <p>المنطقة: {profile.district}</p>
+        <p>
+          المدينة : <strong>{profile.city}</strong>
+        </p>
+        <p>
+          المنطقة : <strong>{profile.district}</strong>
+        </p>
+        <ServContainer>
+          {profile.services?.map((i, index) => (
+            <ServWrapper
+              style={{ backgroundColor: random() }}
+              random={colors[random]}
+              key={index}
+            >
+              {i}
+            </ServWrapper>
+          ))}
+        </ServContainer>
       </InputFields>
       <hr />
       <Contact>تواصل معي</Contact>
@@ -90,7 +111,7 @@ const Picture = styled.div`
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  margin-bottom: 30px;
+  margin: 30px 0;
 
   @media screen and (max-width: 768px) {
     width: 141px;
@@ -98,9 +119,17 @@ const Picture = styled.div`
   }
 `;
 const ProfPicWrapper = styled.div`
-  width: 100px;
+  display: flex;
+  justify-content: center;
+  width: 200px;
+  svg {
+    width: 100px;
+  }
   @media (max-width: 768px) {
-    width: 70px;
+    width: 150px;
+    svg {
+      width: 70px;
+    }
   }
 `;
 
@@ -116,7 +145,7 @@ const UserNameContainer = styled.div`
 const InputFields = styled.div`
   width: 100%;
   text-align: right;
-  padding: 22px;
+  padding: 10px 22px;
   font-size: 1.2rem;
   @media (max-width: 768px) {
     font-size: 1rem;
@@ -139,5 +168,24 @@ const IconsWrapper = styled.div`
   width: 50%;
   justify-content: space-evenly;
   align-items: center;
+  margin-bottom: 20px;
+`;
+
+const ServContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  /* justify-content: center; */
+  margin-top: 10px;
+  padding: 10px 0;
+`;
+
+const ServWrapper = styled.div`
+  border: 1px solid #a7a7a7;
+  border-radius: 40px;
+  padding: 2px 15px;
+  margin: 4px 4px;
+  color: #000000;
+  font-size: 0.8rem;
 `;
 export default Card;

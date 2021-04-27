@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+const URL = '/api/user/current-user';
 export function withAuthServerSideProps() {
   return async (ctx) => {
     const cookie = ctx.req?.headers.cookie;
@@ -7,7 +8,7 @@ export function withAuthServerSideProps() {
     try {
       const res = await axios({
         method: 'GET',
-        url: '/api/user/get-user',
+        url: URL,
         headers: {
           cookie,
         },
@@ -28,14 +29,14 @@ export function profileProtect() {
     try {
       const res = await axios({
         method: 'GET',
-        url: '/api/user/get-user',
+        url: URL,
         headers,
       });
       if (res.status === 200) {
         return { props: {} };
       }
     } catch (error) {
-      return { redirect: { permanent: false, destination: '/' } };
+      return { redirect: { permanent: false, destination: '/login' } };
     }
   };
 }

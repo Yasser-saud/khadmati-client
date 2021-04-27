@@ -7,6 +7,7 @@ import { useRecoilState } from 'recoil';
 import { userState } from '../../context/recoilStates';
 import { useRouter } from 'next/router';
 import tw from 'twin.macro';
+
 const index = () => {
   const [nav, setNav] = useState(false);
 
@@ -81,9 +82,6 @@ const Wrapper = styled.div`
   width: 100%;
   background: ${(props) => (props.ws ? '#eeeeee' : 'transparent')};
   transition: 0.2s ease-in-out;
-  a {
-    color: ${(props) => (props.ws ? 'black' : '')};
-  }
   ${(props) => props.ws && tw`shadow-md`}
 `;
 const Nav = styled.div`
@@ -91,6 +89,7 @@ const Nav = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
+  padding: 0 10px;
 `;
 const LeftWrapper = styled.div`
   display: flex;

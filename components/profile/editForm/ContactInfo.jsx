@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import ErrorStyle from './ErrorStyle';
+import FormInput from '../../general/FormInput';
 
 const ContactInfo = ({ register, errors, profile }) => {
   return (
@@ -8,34 +9,34 @@ const ContactInfo = ({ register, errors, profile }) => {
       <Tag>بيانات التواصل</Tag>
 
       <label>Twitter / حساب التويتر</label>
-      <input
+      <FormInput
         type="name"
         name="twitterAcc"
-        ref={register}
+        register={register}
         defaultValue={profile?.twitterAcc}
         placeholder="@user123"
+        err={errors.twitterAcc}
       />
-      <ErrorStyle msg={errors.twitterAcc?.message} />
 
       <label>Instagram / حساب الانستقرام</label>
-      <input
+      <FormInput
         type="name"
         name="instagramAcc"
-        ref={register}
+        register={register}
         defaultValue={profile?.instagramAcc}
         placeholder="@user123"
+        err={errors.instagramAcc}
       />
-      <ErrorStyle msg={errors.instagramAcc?.message} />
 
       <label>WhatsApp / رقم الواتس اب</label>
-      <input
+      <FormInput
         type="name"
         name="whatsappAcc"
-        ref={register}
+        register={register}
         defaultValue={profile?.whatsappAcc}
         placeholder="0512345678"
+        err={errors.whatsappAcc}
       />
-      <ErrorStyle msg={errors.whatsappAcc?.message} />
     </Container>
   );
 };
@@ -67,7 +68,7 @@ const Container = styled.div`
     background: white;
     height: 40px;
     font-size: 13px;
-    filter: drop-shadow(1px 1px 3px rgba(0, 0, 0, 0.15));
+    /* filter: drop-shadow(1px 1px 3px rgba(0, 0, 0, 0.15)); */
     border-radius: 4px;
     padding: 0 10px;
     &:valid {

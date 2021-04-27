@@ -1,6 +1,6 @@
 import React from 'react';
 import Register from '../components/register';
-import { withAuthServerSideProps } from '../components/serverSideAuth';
+import { withAuthServerSideProps } from '../components/pageProtect';
 
 const register = () => {
   return <Register />;

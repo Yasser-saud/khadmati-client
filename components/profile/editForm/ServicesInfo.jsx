@@ -71,6 +71,7 @@ const ServicesInfo = ({ register, errors }) => {
     </Container>
   );
 };
+
 const Container = styled.div`
   flex: 35%;
   order: 2;
@@ -85,12 +86,14 @@ const Container = styled.div`
   flex-direction: column;
   margin: 20px;
 `;
+
 const Tag = styled.div`
   text-align: center;
   font-size: 24px;
   margin-bottom: 10px;
   padding: 10px 0;
 `;
+
 const Wrapper = styled.div`
   display: flex;
   flex-direction: row-reverse;
@@ -103,6 +106,7 @@ const Wrapper = styled.div`
   margin-bottom: 20px;
   position: relative;
   overflow: hidden;
+ /// fix webkist apperance 
 `;
 
 export default ServicesInfo;

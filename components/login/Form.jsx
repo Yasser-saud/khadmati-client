@@ -11,8 +11,8 @@ import React from 'react';
 import tw from 'twin.macro';
 import ErrAlert from '../general/ErrAlert';
 import Spinner from '../svg/Spinner.svg';
-// import ErrMsg from '../general/ErrMsg';
 import FormInput from '../general/FormInput';
+
 /////
 const Form = () => {
   const router = useRouter();
@@ -28,22 +28,20 @@ const Form = () => {
         { email, password },
         { withCredentials: true }
       );
-
+      sessionStorage.setItem('isLoggedIn', true);
       router.push('/');
     } catch (error) {
       setLoading(false);
       if (error.response) {
-        const msg = await error.response.data.msg;
-        setError(msg);
-      } else if (error.request) {
-      } else {
-        console.log('ERORR in login', error);
+        const msg = await error.response.data.message;
+        return setError(msg);
       }
+      return router.push('/500');
     }
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <FormContainer onSubmit={handleSubmit(onSubmit)}>
       {error && <ErrAlert error={error} />}
 
       <InputWrapper>
@@ -78,17 +76,20 @@ const Form = () => {
         <Link href="/">نسيت كلمة المرور؟</Link>
       </ForgetPass>
 
-      <Submit loading={loading} disabled={loading ? true : false}>
+      <Submit loading={loading} disabled={loading ? 'true' : false}>
         {loading ? <Spinner /> : 'تسجيل الدخول'}
       </Submit>
 
       <Register>
         اضعط <Link href="/register">هنا</Link> اذا لايوجد لديك حساب
       </Register>
-    </form>
+    </FormContainer>
   );
 };
 
+const FormContainer = styled.form`
+  width: 355px;
+`;
 const InputWrapper = styled.div`
   display: flex;
 `;
