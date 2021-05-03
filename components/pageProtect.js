@@ -14,7 +14,6 @@ export function withAuthServerSideProps() {
           cookie,
         },
       });
-      console.log(res);
       if (res.status === 200) {
         return { redirect: { permanent: false, destination: '/' } };
       }
@@ -35,7 +34,6 @@ export function profileProtect() {
       if (res.status != 401) {
         return { props: { test: 'test' } };
       }
-      console.log(res);
     } catch (error) {
       console.log(error);
       return { redirect: { permanent: false, destination: '/login' } };
