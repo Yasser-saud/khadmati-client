@@ -1,25 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import SearchIcon from '../svg/search.svg';
 import tw from 'twin.macro';
 import axios from 'axios';
-import Filter from './Filter';
 
 const SearchAndFilter = ({ searchRef, setResult, payload, setPayload }) => {
   const [query, setQuery] = useState('');
-
-  // const fetch = async () => {
-  //   if (query != null) {
-  //     const payload = query.split(' ');
-  //     const test = { payload: [query] };
-  //     try {
-  //       const res = await axios.post(`/api/profile/search`, test);
-  //       setResult(res.data);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   }
-  // };
 
   const handelFetch = async () => {
     if (query) {
@@ -48,6 +34,7 @@ const SearchAndFilter = ({ searchRef, setResult, payload, setPayload }) => {
             type="text"
             ref={searchRef}
             value={query}
+            placeholder="ابحث هنا"
             onChange={(e) => setQuery(e.target.value)}
           />
           <SearchBtn onClick={handelFetch}>
