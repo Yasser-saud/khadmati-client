@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const URL = '/api/user/current-user';
+
 export function withAuthServerSideProps() {
   return async (ctx) => {
     const cookie = ctx.req?.headers.cookie;
@@ -13,10 +14,12 @@ export function withAuthServerSideProps() {
           cookie,
         },
       });
+      console.log(res);
       if (res.status === 200) {
         return { redirect: { permanent: false, destination: '/' } };
       }
     } catch (error) {
+      console.log(error);
       return { props: {} };
     }
   };
@@ -33,9 +36,11 @@ export function profileProtect() {
         headers,
       });
       if (res.status === 200) {
-        return { props: {} };
+        return { props: { test: 'test' } };
       }
+      console.log(res);
     } catch (error) {
+      console.log(error);
       return { redirect: { permanent: false, destination: '/login' } };
     }
   };
