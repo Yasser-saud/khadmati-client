@@ -30,9 +30,13 @@ export function profileProtect() {
     const headers = ctx.req?.headers;
 
     try {
-      const res = await axios.get(URL, {
+      const res = await fetch({
+        method: 'GET',
+        url: 'https://server.khadmati.xyz/api/user/current-user',
+        credentials: 'include',
         headers,
       });
+      console.log(res.status);
       if (res.status != 401) {
         return { props: { test: 'test' } };
       }
