@@ -30,9 +30,7 @@ export function profileProtect() {
     const headers = ctx.req?.headers;
 
     try {
-      const res = await axios({
-        method: 'GET',
-        url: URL,
+      const res = await axios.get(URL, {
         headers,
       });
       if (res.status != 401) {
