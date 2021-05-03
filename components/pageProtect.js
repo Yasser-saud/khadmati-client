@@ -35,7 +35,7 @@ export function profileProtect() {
         url: URL,
         headers,
       });
-      if (res.status === 200) {
+      if (res.status != 401) {
         return { props: { test: 'test' } };
       }
       console.log(res);
