@@ -11,7 +11,7 @@ import React from 'react';
 import 'tailwindcss/tailwind.css';
 
 axios.defaults.baseURL = 'https://server.khadmati.xyz';
-// axios.defaults.baseURL = 'https://www.khadmati.xyz';
+// axios.defaults.baseURL = 'http://localhost:5000';
 axios.defaults.withCredentials = true;
 
 NProgress.configure({

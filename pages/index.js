@@ -5,14 +5,23 @@ import { userState } from '../context/recoilStates';
 import Homepage from '../components/home';
 
 export default function Home() {
-  useEffect(async () => {
+  const currentUser = async () => {
     try {
       const res = await axios.get('/api/user/current-user');
       setUser(res.data);
     } catch (error) {
       console.log(error);
     }
-  });
+  };
+  useEffect(() => {
+    let mouted = true;
+    if (mouted) {
+      currentUser();
+    }
+    return () => {
+      mouted = false;
+    };
+  }, []);
   const [user, setUser] = useRecoilState(userState);
 
   useEffect(() => {
